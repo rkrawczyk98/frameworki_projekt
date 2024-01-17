@@ -8,6 +8,9 @@ interface UserData {
     // Dodaj inne potrzebne pola
 }
 
+//To ma być:
+//Strona użytkownika zalogowanego ze wszystkimi danymi, z jego postami, z jego zdjęciami + możliwość edycji danych usera ale tylko zalogowanego
+
 const UserPage: React.FC = () => {
     const [userData, setUserData] = useState<UserData | null>(null);
 

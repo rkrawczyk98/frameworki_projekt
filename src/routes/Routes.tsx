@@ -4,12 +4,14 @@ import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import UserPage from '../pages/UserPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import RegisterPage from '../pages/Register';
 
 const AppRoutes = () => {
     return (
         <Router>
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/register" element={<RegisterPage />} />             
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/user" element={<UserPage />} />
                 <Route path="*" element={<NotFoundPage />} />
