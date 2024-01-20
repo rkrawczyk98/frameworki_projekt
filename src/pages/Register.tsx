@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link , useNavigate } from 'react-router-dom';
+import { User } from '../types/user/User';
+import { useAuth } from '../contexts/UserContext';
+import NavBar from '../components/navbar/NavBar';
 
 interface AccountFormData {
     username: string;
@@ -7,42 +11,14 @@ interface AccountFormData {
     confirmPassword: string;
 }
 
-interface User {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    // Dodaj tutaj inne pola z API, jeśli są potrzebne
-}
-
 const CreateAccount = () => {
     const [formData, setFormData] = useState<AccountFormData>({ username: '', email: '', password: '', confirmPassword: '' });
-    
-    const [users, setUsers] = useState(() => {
-        const localUsers = JSON.parse(localStorage.getItem('users') || '[]');
-        return localUsers;
-    });
+    const { users, addUser, fetchUsers } = useAuth();
+    const navigate = useNavigate();
     
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                // Pobieranie użytkowników z API
-                const response = await fetch('https://jsonplaceholder.typicode.com/users');
-                const apiUsers: User[] = await response.json();
-    
-                // Pobieranie użytkowników z localStorage
-                const localUsers: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-    
-                // Łączenie listy użytkowników z API i z localStorage
-                const combinedUsers = [...localUsers, ...apiUsers];
-                setUsers(combinedUsers);
-            } catch (error) {
-                console.error('Błąd podczas pobierania użytkowników:', error);
-            }
-        };
-    
         fetchUsers();
-    }, []);
+    }, [fetchUsers]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -69,14 +45,44 @@ const CreateAccount = () => {
         }
     
         // Zapisywanie nowego użytkownika
-        const newUser = { ...formData, id: users.length + 1 };
-        const updatedUsers = [...users, newUser];
-        setUsers(updatedUsers);
-        localStorage.setItem('users', JSON.stringify(updatedUsers));
+        const maxId = users.reduce((max, user) => user.id > max ? user.id : max, 0);
+        const newUser: User = {
+            id: maxId + 1,
+            username: formData.username,
+            email: formData.email,
+            name: formData.username,
+            password: formData.password,
+            address: {
+                street: '',
+                suite: '',
+                city: '',
+                zipcode: '',
+                geo: {
+                    lat: '',
+                    lng: ''
+                }
+            },
+            phone: '',
+            website: '',
+            company: {
+                name: '',
+                catchPhrase: '',
+                bs: ''
+            }
+        };
+        
+        if (newUser) {
+            addUser(newUser);
+            navigate('/');
+        } else {
+            alert('Niepoprawne dane rejestracji.');
+        }
+
     };
 
     return (
         <div className="register-page">
+            <NavBar></NavBar>
             <h1>Utwórz Konto</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">

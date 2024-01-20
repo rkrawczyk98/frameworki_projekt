@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
-// Definiuj typ dla danych zdjęcia
-interface Photo {
-    albumId: number;
-    id: number;
-    title: string;
-    url: string;
-    thumbnailUrl: string;
-}
+import { useAuth } from '../contexts/UserContext';
+import NavBar from '../components/navbar/NavBar';
+import { Photo } from '../types/Photo';
 
 const HomePage = () => {
     const [photos, setPhotos] = useState<Photo[]>([]);
+    const { user } = useAuth();
 
     useEffect(() => {
         // Pobieranie danych ze zdjęciami
@@ -31,15 +26,12 @@ const HomePage = () => {
     return (
         <div className="home-page">
             <header>
+                <NavBar>
+                    {!user && <Link to="/login">Logowanie</Link>}
+                    {!user && <Link to="/register">Rejestracja</Link>}
+                    {user && <Link to={`/user/${user.id}`}>Profil Użytkownika</Link>}
+                </NavBar>
                 <h1>Projekt semestralny</h1>
-                <nav>
-                    <ul>
-                        <li><Link to="/">Strona Główna</Link></li>
-                        <li><Link to="/login">Logowanie</Link></li>
-                        <li><Link to="/register">Rejestracja</Link></li>
-                        <li><Link to="/user">Profil Użytkownika</Link></li>
-                    </ul>
-                </nav>
             </header>
             <main>
                 <h2>Witamy na stronie głównej naszego projektu</h2>

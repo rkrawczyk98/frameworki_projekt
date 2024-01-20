@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-// Zaimportuj dodatkowe zależności, jeśli są potrzebne
+import { Link , useNavigate } from 'react-router-dom';
+import { useAuth }  from '../contexts/UserContext';
+import NavBar from '../components/navbar/NavBar';
 
 interface LoginFormData {
     username: string;
@@ -8,7 +10,10 @@ interface LoginFormData {
 
 const LoginPage: React.FC = () => {
     const [formData, setFormData] = useState<LoginFormData>({ username: '', password: '' });
-
+    const { loginUser } = useAuth();
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -18,11 +23,22 @@ const LoginPage: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Logika logowania, np. wysłanie danych do API
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const foundUser = users.find((user: any) => user.username === formData.username && user.password === formData.password);
+
+        if (foundUser) {
+            loginUser(foundUser);
+            navigate('/');
+        } else {
+            alert('Niepoprawne dane logowania');
+        }
     };
 
     return (
         <div className="login-page">
+            <NavBar>
+                {!user && <Link to="/register">Rejestracja</Link>}
+            </NavBar>
             <form onSubmit={handleSubmit}>
                 <h2>Logowanie</h2>
                 <div className="form-group">
