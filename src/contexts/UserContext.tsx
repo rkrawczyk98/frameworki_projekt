@@ -8,6 +8,7 @@ interface AuthContextType {
     logoutUser: () => void;
     fetchUsers: () => void;
     addUser: (newUser: User) => void;
+    editUser: (editedUser: User) => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -21,11 +22,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const savedUser = sessionStorage.getItem('loggedUser');
         return savedUser ? JSON.parse(savedUser) : null;
     });
-    const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<User[]>(() => {
+        const savedUsers = localStorage.getItem('users');
+        return savedUsers ? JSON.parse(savedUsers) : null;
+    });
 
     useEffect(() => {
         fetchUsers();
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('users', JSON.stringify(users));
+    }, [users]);
 
     const loginUser = (userData: User) => {
         setUser(userData);
@@ -36,26 +44,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(null);
         sessionStorage.removeItem('loggedUser');
     };
-    console.log(user);
 
     const fetchUsers = async () => {
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/users');
             const apiUsers: User[] = await response.json();
             const localUsers: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-    
-            const userMap: { [key: string]: User } = {};
-    
-            // Dodaj użytkowników do mapy, usuwając duplikaty
-            [...localUsers, ...apiUsers].forEach(user => {
-                if (!user.password || user.password.trim() === '') {
-                    user.password = 'Haslo123!';
-                }
-                userMap[user.id] = user;
-            });
-    
-            const combinedUsers = Object.values(userMap);
-            setUsers(combinedUsers);
+            const newApiUsers = apiUsers.filter(apiUser => 
+                !localUsers.some(localUser => localUser.id === apiUser.id)
+            );
+            setUsers([...localUsers, ...newApiUsers]);
         } catch (error) {
             console.error('Błąd podczas pobierania użytkowników:', error);
         }
@@ -66,9 +64,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUsers(updatedUsers);
         localStorage.setItem('users', JSON.stringify(updatedUsers));
     };
+
+    const editUser = (editedUser: User) => {
+        const updatedUsers = users.map(user => 
+            user.id === editedUser.id ? editedUser : user
+        );
+        setUsers(updatedUsers);
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+    };
     
     return (
-        <AuthContext.Provider value={{ user, users, loginUser, logoutUser, fetchUsers, addUser  }}>
+        <AuthContext.Provider value={{ user, users, loginUser, logoutUser, fetchUsers, addUser, editUser }}>
             {children}
         </AuthContext.Provider>
     );

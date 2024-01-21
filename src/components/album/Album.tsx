@@ -1,30 +1,83 @@
-import React from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useAlbums } from '../../contexts/AlbumContext';
+import { Album } from '../../types/Album';
 import { useAuth } from '../../contexts/UserContext';
 import styles from './styles.module.css';
 
-interface NavBarProps {
-    children?: React.ReactNode;
+interface AlbumComponentProps {
+    filteredAlbums: Album[];
+    showManipulateButtons: boolean;
 }
 
-function NavBar({ children }: NavBarProps) {
-    const { user, logoutUser } = useAuth();
-    const navigate = useNavigate();
+const AlbumComponent: React.FC<AlbumComponentProps> = ({ filteredAlbums, showManipulateButtons }) => {
+    const { albums, addAlbum, editAlbum, deleteAlbum } = useAlbums();
+    const [newAlbumTitle, setNewAlbumTitle] = useState('');
+    const [editAlbumTitle, setEditAlbumTitle] = useState('');
+    const [editAlbumId, setEditAlbumId] = useState<number | null>(null);
+    const { user } = useAuth();
 
-    const handleLogout = () => {
-        logoutUser();
-        navigate('/');
-    }
+    const handleAddAlbum = () => {
+        if(user?.id){
+            const newAlbum: Album = {
+                userId: user.id,
+                id: Math.max(...albums.map(a => a.id), 0) + 1,
+                title: newAlbumTitle,
+            };
+            addAlbum(newAlbum);
+            setNewAlbumTitle('');
+        } else {
+            alert('Aby dodawać albumy musisz być zalogowanym użytkownikiem.');
+        }
+    };
+
+    const handleEditAlbum = (album: Album) => {
+        setEditAlbumId(album.id);
+        setEditAlbumTitle(album.title);
+    };
+
+    const handleSaveEdit = () => {
+        if (editAlbumId && user?.id) {
+            editAlbum({ userId: user.id, id: editAlbumId, title: editAlbumTitle });
+            setEditAlbumId(null);
+            setEditAlbumTitle('');
+        } else {
+            alert('Aby edytować albumy musisz być zalogowanym użytkownikiem.');
+        }
+    };
 
     return (
-        <div className={styles.wrapper}>
-            <Link to='/' className={`${styles.aBtn} ${styles.homeLink}`}>Strona główna</Link>
-            <div className={`${styles.btnSegment} ${styles.children}`}>
-                {children}
-                {user && <button className={styles.btn} onClick={handleLogout}>Wyloguj</button>}
+        <div>
+            <h2>Albumy</h2>
+            <div>
+                {filteredAlbums.map(album => (
+                    <div key={album.id}>
+                        {editAlbumId === album.id && showManipulateButtons ? (
+                            <>
+                                <label>Tytuł: </label>
+                                <input value={editAlbumTitle} onChange={e => setEditAlbumTitle(e.target.value)} />
+                                <button onClick={handleSaveEdit}>Zapisz</button>
+                            </>
+                        ) : (
+                            <>
+                                <label>Tytuł: </label>
+                                <span>{album.title}</span>
+                                <label>Numer albumu: </label>
+                                <span>{album.id}</span>
+                                {showManipulateButtons ? <button onClick={() => handleEditAlbum(album)}>Edytuj</button> : null}
+                                {showManipulateButtons ? <button onClick={() => deleteAlbum(album.id)}>Usuń</button> : null}
+                            </>
+                        )}
+                    </div>
+                ))}
             </div>
+            {showManipulateButtons ?
+            <div>
+                <label>Tytuł:</label>
+                <input value={newAlbumTitle} onChange={e => setNewAlbumTitle(e.target.value)} />
+                <button onClick={handleAddAlbum}>Dodaj Album</button>
+            </div> : null}
         </div>
-    )
-}
+    );
+};
 
-export default {};
+export default AlbumComponent;

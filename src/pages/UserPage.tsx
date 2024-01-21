@@ -6,49 +6,111 @@ import { Album } from '../types/Album';
 import { Photo } from '../types/Photo';
 import { Post } from '../types/Post';
 import { User } from '../types/user/User';
-
-
-//To ma być:
-//Strona użytkownika zalogowanego ze wszystkimi danymi, z jego postami, z jego zdjęciami + możliwość edycji danych usera ale tylko zalogowanego
+import AlbumComponent from '../components//album/Album';
+import PhotoComponent from '../components/photo/Photo';
+import { useAlbums } from '../contexts/AlbumContext';
+import { usePhotos } from '../contexts/PhotoContext';
+import { usePosts } from '../contexts/PostContext';
+import PostComponent from '../components/post/Post';
 
 const UserPage: React.FC = () => {
     const [profileUser, setProfileUser] = useState<User | null>(null);
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [albums, setAlbums] = useState<Album[]>([]);
-    const [photos, setPhotos] = useState<Photo[]>([]);   
+    const [filteredAlbums, setFilteredAlbums] = useState<Album[]>([]);
+    const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
+    const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
 
-    const { users } = useAuth();
+    const { photos } = usePhotos();
+    const { albums } = useAlbums();
+    const { posts } = usePosts();
+    const { users, editUser } = useAuth();
     const { user } = useAuth();
     const { userId: paramUserId } = useParams();
     const userId = paramUserId ? Number(paramUserId) : user?.id;
-    const isCurrentUserProfile = user && user.id === userId;
+    const isCurrentUserProfile: boolean = user && user.id === userId ? true : false;
+
+    const [editedName, setEditedName] = useState("");
+    const [editedUsername, setEditedUsername] = useState("");
+    const [editedEmail, setEditedEmail] = useState("");
+    const [editedAdressStreet, setEditedAdressStreet] = useState("");
+    const [editedAdressCity, setEditedAdressCity] = useState("");
+    const [editedPhone, setEditedPhone] = useState("");
+    const [editedWebsite, setEditedWebsite] = useState("");
+    const [editedCompanyName, setEditedCompanyName] = useState("");
+    const [editedCompanyCatchPhrase, setEditedCompanyCatchPhrase] = useState("");
+    const [editedCompanyBs, setEditedCompanyBs] = useState("");
+    const [editedAdressGeoLat, setEditedAdressGeoLat] =  useState("");
+    const [editedAdressGeoLng, setEditedAdressGeoLng] =  useState("");
+    const [editedAdressSuite, setEditedAdressSuite] =  useState("");
+    const [editedAdressZipCode, setEditedAdressZipCode] = useState("");
+
+    useEffect(() => {
+        if (profileUser) {
+            setEditedName(profileUser.name);
+            setEditedEmail(profileUser.email);
+            setEditedUsername(profileUser.username);
+            setEditedAdressStreet(profileUser.address.street)
+            setEditedAdressCity(profileUser.address.city)
+            setEditedAdressGeoLat(profileUser.address.geo.lat)
+            setEditedAdressGeoLng(profileUser.address.geo.lng)
+            setEditedAdressSuite(profileUser.address.suite)
+            setEditedAdressZipCode(profileUser.address.zipcode)
+            setEditedPhone(profileUser.phone)
+            setEditedWebsite(profileUser.website)
+            setEditedCompanyName(profileUser.company.name)
+            setEditedCompanyCatchPhrase(profileUser.company.catchPhrase)
+            setEditedCompanyBs(profileUser.company.bs)
+        }
+    }, [profileUser]);
 
     const handleEditSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Logika edycji danych użytkownika
+        if (profileUser) {
+            const updatedUser = {
+                id: profileUser.id,
+                password: profileUser.password,
+                name: editedName,
+                username: editedUsername,
+                email: editedEmail,
+                address: {
+                    street: editedAdressStreet,
+                    city: editedAdressCity,
+                    suite: editedAdressSuite,
+                    zipcode: editedAdressZipCode,
+                    geo: {
+                        lat: editedAdressGeoLat,
+                        lng: editedAdressGeoLng
+                    }
+                },
+                phone: editedPhone,
+                website: editedWebsite,
+                company:{
+                    name: editedCompanyName,
+                    catchPhrase: editedCompanyCatchPhrase,
+                    bs: editedCompanyBs,
+                }
+            };
+            editUser(updatedUser);
+            setProfileUser(updatedUser);
+        }
     };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 if (userId) { 
-                    const foundUser = users.find((u) => u.id === userId);
-                    if (foundUser) {
-                        setProfileUser(foundUser);
+                    const foundUser = users.filter((u)=>u.id === userId)[0];
+                    setProfileUser(foundUser);
 
-                        const postsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
-                        const userPosts = await postsResponse.json();
-                        setPosts(userPosts);
-        
-                        const albumsResponse = await fetch(`https://jsonplaceholder.typicode.com/albums?userId=${userId}`);
-                        const userAlbums = await albumsResponse.json();
-                        setAlbums(userAlbums);
+                    const userAlbums = albums.filter(album => album.userId === userId);
+                    setFilteredAlbums(userAlbums);
+            
+                    const userPhotos = photos.filter(photo => 
+                        userAlbums.some(album => album.id === photo.albumId)
+                    );
+                    setFilteredPhotos(userPhotos);
 
-                        const photosResponse = await fetch(`https://jsonplaceholder.typicode.com/photos`);
-                        const allPhotos = await photosResponse.json();
-                        const userPhotos = allPhotos.filter((photo: Photo) => userAlbums.some((album: Album) => album.id === photo.albumId));
-                        setPhotos(userPhotos);
-                    }
+                    const userPosts = posts.filter(post => post.userId === userId);
+                    setFilteredPosts(userPosts);
                 }
             } catch (error) {
                 console.error('Błąd podczas pobierania danych:', error);
@@ -56,7 +118,7 @@ const UserPage: React.FC = () => {
         };
     
         fetchData();
-    }, [userId, users]);
+    }, [userId, albums, photos, posts]);
 
     if (!user) return <div>Ładowanie danych użytkownika...</div>;
 
@@ -67,52 +129,47 @@ const UserPage: React.FC = () => {
             <div><strong>Imię i Nazwisko:</strong> {profileUser?.name}</div>
             <div><strong>Nazwa użytkownika:</strong> {profileUser?.username}</div>
             <div><strong>Email:</strong> {profileUser?.email}</div>
-            <div><strong>Adres:</strong> {`${profileUser?.address.street}, ${profileUser?.address.city}`}</div>
+            <div><strong>Adres:</strong> {`${profileUser?.address.street + ','} ${profileUser?.address.city}`}</div>
             <div><strong>Telefon:</strong> {profileUser?.phone}</div>
             <div><strong>Strona WWW:</strong> {profileUser?.website}</div>
             <div><strong>Firma:</strong> {profileUser?.company.name}</div>
             {user?.id && isCurrentUserProfile && (
                 <form onSubmit={handleEditSubmit}>
                     <h3>Edytuj Dane</h3>
-                    {/* Pola formularza do edycji danych, np. email, telefon */}
-                    <input type="email" value={profileUser?.email} /* onChange={handler }*/ />
-                    <input type="text" value={profileUser?.phone} /* onChange={handler }*/ />
-                    {/* inne pola */}
+                    <label>Imię i Nazwisko:</label>
+                    <input type="name" value={editedName}  onChange={ (e) => setEditedName(e.target.value) } />
+                    <label>Nazwa użytkownika:</label>
+                    <input type="username" value={editedUsername} onChange={ (e) => setEditedUsername(e.target.value) } />
+                    <label>Email:</label>
+                    <input type="email" value={editedEmail} onChange={ (e) => setEditedEmail(e.target.value) } />
+                    <label>Miasto:</label>
+                    <input type="text" value={editedAdressCity} onChange={ (e) => setEditedAdressCity(e.target.value) } />
+                    <label>Ulica:</label>
+                    <input type="text" value={editedAdressStreet} onChange={ (e) => setEditedAdressStreet(e.target.value) } />
+                    <label>Kod pocztowy:</label>
+                    <input type="text" value={editedAdressZipCode} onChange={ (e) => setEditedAdressZipCode(e.target.value) } />
+                    <label>Numer lokalu:</label>
+                    <input type="text" value={editedAdressSuite} onChange={ (e) => setEditedAdressSuite(e.target.value) } />
+                    <label>Szerokość geograficzna:</label>
+                    <input type="text" value={editedAdressGeoLat} onChange={ (e) => setEditedAdressGeoLat(e.target.value) } />
+                    <label>Długość geograficzna:</label>
+                    <input type="text" value={editedAdressGeoLng} onChange={ (e) => setEditedAdressGeoLng(e.target.value) } />
+                    <label>Telefon:</label>
+                    <input type="text" value={editedPhone} onChange={ (e) => setEditedPhone(e.target.value) } />
+                    <label>Strona WWW:</label>
+                    <input type="text" value={editedWebsite} onChange={ (e) => setEditedWebsite(e.target.value) } />
+                    <label>Firma:</label>
+                    <input type="text" value={editedCompanyName} onChange={ (e) => setEditedCompanyName(e.target.value) } />
+                    <label>Opis firmy:</label>
+                    <input type="text" value={editedCompanyBs} onChange={ (e) => setEditedCompanyBs(e.target.value) } />
+                    <label>Motto firmy:</label>
+                    <input type="text" value={editedCompanyCatchPhrase} onChange={ (e) => setEditedCompanyCatchPhrase(e.target.value) } />
                     <button type="submit">Zapisz zmiany</button>
                 </form>
             )}
-            <h2>Posty Użytkownika</h2>
-            <div>
-                {posts.map(post => (
-                    <div key={post.id}>
-                        <h3>{post.title}</h3>
-                        <p>{post.body}</p>
-                    </div>
-                ))}
-            </div>
-
-            <h2>Albumy Użytkownika</h2>
-            <div>
-                {albums.map(album => (
-                    <div key={album.id}>
-                        <h3>{album.title}</h3>
-                        <div>
-                            {photos.filter(photo => photo.albumId === album.id).map(filteredPhoto => (
-                                <img key={filteredPhoto.id} src={filteredPhoto.thumbnailUrl} alt={filteredPhoto.title} />
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <h2>Zdjęcia Użytkownika</h2>
-            <div>
-                {photos.map(photo => (
-                    <div key={photo.id}>
-                        <img src={photo.thumbnailUrl} alt={photo.title} />
-                    </div>
-                ))}
-            </div>
+            <PostComponent filteredPosts={filteredPosts} showManipulateButtons = {isCurrentUserProfile}/>
+            <AlbumComponent filteredAlbums={filteredAlbums} showManipulateButtons = {isCurrentUserProfile} />
+            <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons = {isCurrentUserProfile} />
         </div>
     );
 };

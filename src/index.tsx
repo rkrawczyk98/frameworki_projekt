@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './contexts/UserContext';
+import { AlbumProvider } from './contexts/AlbumContext';
+import { PhotoProvider } from './contexts/PhotoContext';
+import { CommentProvider } from './contexts/CommentContext';
+import { ToDoProvider } from './contexts/ToDoContext';
+import { PostProvider } from './contexts/PostContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +17,17 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <CommentProvider>
+        <ToDoProvider>
+          <PostProvider>
+            <AlbumProvider>
+              <PhotoProvider>
+                <App />
+              </PhotoProvider>
+            </AlbumProvider>
+          </PostProvider>
+        </ToDoProvider>
+      </CommentProvider>
     </AuthProvider>
   </React.StrictMode>
 );

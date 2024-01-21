@@ -29,6 +29,8 @@ const HomePage = () => {
                 <NavBar>
                     {!user && <Link to="/login">Logowanie</Link>}
                     {!user && <Link to="/register">Rejestracja</Link>}
+                    <Link to={`/postsPage`}>Posty użytkowników</Link>
+                    {user && <Link to={`/searchUsers`}>Wyszukiwarka użytkowników</Link>}
                     {user && <Link to={`/user/${user.id}`}>Profil Użytkownika</Link>}
                 </NavBar>
                 <h1>Projekt semestralny</h1>
