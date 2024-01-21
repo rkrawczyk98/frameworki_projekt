@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAlbums } from '../../contexts/AlbumContext';
 import { Album } from '../../types/Album';
 import { useAuth } from '../../contexts/UserContext';
+import { usePhotos } from '../../contexts/PhotoContext';
+import Photo from '../../components/photo/Photo';
 import styles from './styles.module.css';
 
 interface AlbumComponentProps {
@@ -15,6 +17,17 @@ const AlbumComponent: React.FC<AlbumComponentProps> = ({ filteredAlbums, showMan
     const [editAlbumTitle, setEditAlbumTitle] = useState('');
     const [editAlbumId, setEditAlbumId] = useState<number | null>(null);
     const { user } = useAuth();
+    const { photos } = usePhotos();
+    const [selectedAlbumId, setSelectedAlbumId] = useState<number | null>(null);
+    const selectedAlbumPhotos = selectedAlbumId ? photos.filter(photo => photo.albumId === selectedAlbumId) : [];
+
+    const handleAlbumClick = (albumId: number) => {
+        if (selectedAlbumId === albumId) {
+            setSelectedAlbumId(null);
+        } else {
+            setSelectedAlbumId(albumId);
+        }
+    };
 
     const handleAddAlbum = () => {
         if(user?.id){
@@ -50,7 +63,7 @@ const AlbumComponent: React.FC<AlbumComponentProps> = ({ filteredAlbums, showMan
             <h2>Albumy</h2>
             <div>
                 {filteredAlbums.map(album => (
-                    <div key={album.id}>
+                    <div key={album.id} onClick={() => handleAlbumClick(album.id)} className={styles.wrapper}>
                         {editAlbumId === album.id && showManipulateButtons ? (
                             <>
                                 <label>Tytuł: </label>
@@ -70,6 +83,7 @@ const AlbumComponent: React.FC<AlbumComponentProps> = ({ filteredAlbums, showMan
                     </div>
                 ))}
             </div>
+            {selectedAlbumId && <Photo filteredPhotos={selectedAlbumPhotos} showManipulateButtons={false} />}
             {showManipulateButtons ?
             <div>
                 <label>Tytuł:</label>

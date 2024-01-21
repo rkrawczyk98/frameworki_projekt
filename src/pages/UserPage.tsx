@@ -43,6 +43,8 @@ const UserPage: React.FC = () => {
     const [editedAdressSuite, setEditedAdressSuite] =  useState("");
     const [editedAdressZipCode, setEditedAdressZipCode] = useState("");
 
+    const [viewMode, setViewMode] = useState('albums'); // Możliwe wartości: 'albums', 'photos'
+
     useEffect(() => {
         if (profileUser) {
             setEditedName(profileUser.name);
@@ -167,9 +169,13 @@ const UserPage: React.FC = () => {
                     <button type="submit">Zapisz zmiany</button>
                 </form>
             )}
+            <button onClick={() => setViewMode('albums')}>Albumy</button>
+            <button onClick={() => setViewMode('photos')}>Zdjęcia</button>
+            {viewMode === 'albums' && <AlbumComponent filteredAlbums={filteredAlbums} showManipulateButtons={isCurrentUserProfile} />}
+            {viewMode === 'photos' && <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons={isCurrentUserProfile} />}
             <PostComponent filteredPosts={filteredPosts} showManipulateButtons = {isCurrentUserProfile}/>
-            <AlbumComponent filteredAlbums={filteredAlbums} showManipulateButtons = {isCurrentUserProfile} />
-            <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons = {isCurrentUserProfile} />
+            {/* <AlbumComponent filteredAlbums={filteredAlbums} showManipulateButtons = {isCurrentUserProfile} />
+            <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons = {isCurrentUserProfile} /> */}
         </div>
     );
 };

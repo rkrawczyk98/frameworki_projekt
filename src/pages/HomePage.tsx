@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/UserContext';
+import { usePhotos } from '../contexts/PhotoContext';
+import { useAlbums } from '../contexts/AlbumContext';
 import NavBar from '../components/navbar/NavBar';
-import { Photo } from '../types/Photo';
+import AlbumComponent from '../components//album/Album';
+import PhotoComponent from '../components/photo/Photo';
+import PhotoSearcher from '../components/photoSearcher/PhotoSearcher';
 
 const HomePage = () => {
-    const [photos, setPhotos] = useState<Photo[]>([]);
     const { user } = useAuth();
+    const { albums } = useAlbums();
+    const { photos } = usePhotos();
+    const [viewMode, setViewMode] = useState('albums'); // Możliwe wartości: 'albums', 'photos'
 
-    useEffect(() => {
-        // Pobieranie danych ze zdjęciami
-        const fetchPhotos = async () => {
-            try {
-                const response = await axios.get('https://jsonplaceholder.typicode.com/photos');
-                setPhotos(response.data);
-            } catch (error) {
-                console.error('Błąd podczas pobierania zdjęć:', error);
-            }
-        };
+    // useEffect(() => {
+    //     // Pobieranie danych ze zdjęciami
+    //     const fetchPhotos = async () => {
+    //         try {
+    //             const response = await axios.get('https://jsonplaceholder.typicode.com/photos');
+    //             setPhotos(response.data);
+    //         } catch (error) {
+    //             console.error('Błąd podczas pobierania zdjęć:', error);
+    //         }
+    //     };
 
-        fetchPhotos();
-    }, []);
+    //     fetchPhotos();
+    // }, []);
 
     return (
         <div className="home-page">
@@ -38,12 +43,13 @@ const HomePage = () => {
             <main>
                 <h2>Witamy na stronie głównej naszego projektu</h2>
                 <div className="photo-feed">
-                    {photos.map(photo => (
-                        <div key={photo.id} className="photo">
-                            <h3>{photo.title}</h3>
-                            <img src={photo.url} alt={photo.title} />
-                        </div>
-                    ))}
+                    <PhotoSearcher/>
+                    {/* <div>
+                        <button onClick={() => setViewMode('albums')}>Albumy</button>
+                        <button onClick={() => setViewMode('photos')}>Zdjęcia</button>
+                    </div>
+                    {viewMode === 'albums' && <AlbumComponent filteredAlbums={albums} showManipulateButtons={false} />}
+                    {viewMode === 'photos' && <PhotoComponent filteredPhotos={photos} showManipulateButtons={false} />} */}
                 </div>
             </main>
             <footer>
