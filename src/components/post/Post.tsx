@@ -52,37 +52,37 @@ const PostComponent: React.FC<PostComponentProps> = ({filteredPosts, showManipul
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <h2>Posty</h2>
             <div>
                 {filteredPosts.map(post => (
-                    <div key={post.id}>
+                    <div key={post.id} className={editPostId === post.id ? `${styles.post} ${styles.editMode}` : styles.post}>
                         {editPostId === post.id && showManipulateButtons ? (
                             <>
-                                <input value={editPostTitle} onChange={e => setEditPostTitle(e.target.value)} />
-                                <input value={editPostBody} onChange={e => setEditPostBody(e.target.value)} />
-                                <button onClick={handleSaveEdit}>Zapisz</button>
+                                <input className={styles.inputField} value={editPostTitle} onChange={e => setEditPostTitle(e.target.value)} />
+                                <input className={styles.inputField} value={editPostBody} onChange={e => setEditPostBody(e.target.value)} />
+                                <button className={styles.button} onClick={handleSaveEdit}>Zapisz</button>
                             </>
                         ) : (
                             <>
-                                <label>Tytuł: </label>
-                                <span>{post.title}</span>
-                                <label>Treść: </label>
-                                <span>{post.body}</span>
-                                {showManipulateButtons ? <button onClick={() => handleEditPost(post)}>Edytuj</button> : null}
-                                {showManipulateButtons ? <button onClick={() => deletePost(post.id)}>Usuń</button> : null}
+                                <div className={styles.postHeader}>Tytuł: <span>{post.title}</span></div>
+                                <div className={styles.postBody}>Treść: <span>{post.body}</span></div>
+                                {showManipulateButtons ? <button className={styles.button} onClick={() => handleEditPost(post)}>Edytuj</button> : null}
+                                {showManipulateButtons ? <button className={styles.button} onClick={() => deletePost(post.id)}>Usuń</button> : null}
                             </>
                         )}
                     </div>
                 ))}
             </div>
-            {showManipulateButtons ? <div>
-                <label>Tytuł:</label>
-                <input value={newPostTitle} onChange={e => setNewPostTitle(e.target.value)} />
-                <label>Treść:</label>
-                <input value={newPostBody} onChange={e => setNewPostBody(e.target.value)} />
-                <button onClick={handleAddPost}>Dodaj Post</button>
-            </div> : null}
+            {showManipulateButtons ? (
+                <div>
+                    <label className={styles.label}>Tytuł:</label>
+                    <input className={styles.inputField} value={newPostTitle} onChange={e => setNewPostTitle(e.target.value)} />
+                    <label className={styles.label}>Treść:</label>
+                    <input className={styles.inputField} value={newPostBody} onChange={e => setNewPostBody(e.target.value)} />
+                    <button className={styles.button} onClick={handleAddPost}>Dodaj Post</button>
+                </div>
+            ) : null}
         </div>
     );
 };

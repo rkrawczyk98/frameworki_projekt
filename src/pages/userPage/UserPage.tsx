@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '../contexts/UserContext';
-import NavBar from '../components/navbar/NavBar';
-import { Album } from '../types/Album';
-import { Photo } from '../types/Photo';
-import { Post } from '../types/Post';
-import { User } from '../types/user/User';
-import AlbumComponent from '../components//album/Album';
-import PhotoComponent from '../components/photo/Photo';
-import { useAlbums } from '../contexts/AlbumContext';
-import { usePhotos } from '../contexts/PhotoContext';
-import { usePosts } from '../contexts/PostContext';
-import PostComponent from '../components/post/Post';
+import { useAuth } from '../../contexts/UserContext';
+import NavBar from '../../components/navbar/NavBar';
+import { Album } from '../../types/Album';
+import { Photo } from '../../types/Photo';
+import { Post } from '../../types/Post';
+import { User } from '../../types/user/User';
+import AlbumComponent from '../../components/album/Album';
+import PhotoComponent from '../../components/photo/Photo';
+import { useAlbums } from '../../contexts/AlbumContext';
+import { usePhotos } from '../../contexts/PhotoContext';
+import { usePosts } from '../../contexts/PostContext';
+import PostComponent from '../../components/post/Post';
+import styles from './styles.module.css';
 
 const UserPage: React.FC = () => {
     const [profileUser, setProfileUser] = useState<User | null>(null);
@@ -125,57 +126,63 @@ const UserPage: React.FC = () => {
     if (!user) return <div>Ładowanie danych użytkownika...</div>;
 
     return (
-        <div className="user-page">
+        <div className={styles.userPage}>
             <NavBar></NavBar>
             <h2>Profil Użytkownika</h2>
-            <div><strong>Imię i Nazwisko:</strong> {profileUser?.name}</div>
-            <div><strong>Nazwa użytkownika:</strong> {profileUser?.username}</div>
-            <div><strong>Email:</strong> {profileUser?.email}</div>
-            <div><strong>Adres:</strong> {`${profileUser?.address.street + ','} ${profileUser?.address.city}`}</div>
-            <div><strong>Telefon:</strong> {profileUser?.phone}</div>
-            <div><strong>Strona WWW:</strong> {profileUser?.website}</div>
-            <div><strong>Firma:</strong> {profileUser?.company.name}</div>
+            <div className={styles.userInfo}>
+                <div><strong>Imię i Nazwisko:</strong> {profileUser?.name}</div>
+                <div><strong>Nazwa użytkownika:</strong> {profileUser?.username}</div>
+                <div><strong>Email:</strong> {profileUser?.email}</div>
+                <div><strong>Adres:</strong> {`${profileUser?.address.street + ','} ${profileUser?.address.city}`}</div>
+                <div><strong>Telefon:</strong> {profileUser?.phone}</div>
+                <div><strong>Strona WWW:</strong> {profileUser?.website}</div>
+                <div><strong>Firma:</strong> {profileUser?.company.name}</div>
+            </div>
             {user?.id && isCurrentUserProfile && (
-                <form onSubmit={handleEditSubmit}>
+                <form onSubmit={handleEditSubmit} className={styles.editForm}>
                     <h3>Edytuj Dane</h3>
-                    <label>Imię i Nazwisko:</label>
-                    <input type="name" value={editedName}  onChange={ (e) => setEditedName(e.target.value) } />
-                    <label>Nazwa użytkownika:</label>
-                    <input type="username" value={editedUsername} onChange={ (e) => setEditedUsername(e.target.value) } />
-                    <label>Email:</label>
-                    <input type="email" value={editedEmail} onChange={ (e) => setEditedEmail(e.target.value) } />
-                    <label>Miasto:</label>
-                    <input type="text" value={editedAdressCity} onChange={ (e) => setEditedAdressCity(e.target.value) } />
-                    <label>Ulica:</label>
-                    <input type="text" value={editedAdressStreet} onChange={ (e) => setEditedAdressStreet(e.target.value) } />
-                    <label>Kod pocztowy:</label>
-                    <input type="text" value={editedAdressZipCode} onChange={ (e) => setEditedAdressZipCode(e.target.value) } />
-                    <label>Numer lokalu:</label>
-                    <input type="text" value={editedAdressSuite} onChange={ (e) => setEditedAdressSuite(e.target.value) } />
-                    <label>Szerokość geograficzna:</label>
-                    <input type="text" value={editedAdressGeoLat} onChange={ (e) => setEditedAdressGeoLat(e.target.value) } />
-                    <label>Długość geograficzna:</label>
-                    <input type="text" value={editedAdressGeoLng} onChange={ (e) => setEditedAdressGeoLng(e.target.value) } />
-                    <label>Telefon:</label>
-                    <input type="text" value={editedPhone} onChange={ (e) => setEditedPhone(e.target.value) } />
-                    <label>Strona WWW:</label>
-                    <input type="text" value={editedWebsite} onChange={ (e) => setEditedWebsite(e.target.value) } />
-                    <label>Firma:</label>
-                    <input type="text" value={editedCompanyName} onChange={ (e) => setEditedCompanyName(e.target.value) } />
-                    <label>Opis firmy:</label>
-                    <input type="text" value={editedCompanyBs} onChange={ (e) => setEditedCompanyBs(e.target.value) } />
-                    <label>Motto firmy:</label>
-                    <input type="text" value={editedCompanyCatchPhrase} onChange={ (e) => setEditedCompanyCatchPhrase(e.target.value) } />
-                    <button type="submit">Zapisz zmiany</button>
+                    <div>
+                        <label>Imię i Nazwisko:</label>
+                        <input type="name" value={editedName}  onChange={ (e) => setEditedName(e.target.value) } />
+                        <label>Nazwa użytkownika:</label>
+                        <input type="username" value={editedUsername} onChange={ (e) => setEditedUsername(e.target.value) } />
+                        <label>Email:</label>
+                        <input type="email" value={editedEmail} onChange={ (e) => setEditedEmail(e.target.value) } />
+                        <label>Miasto:</label>
+                        <input type="text" value={editedAdressCity} onChange={ (e) => setEditedAdressCity(e.target.value) } />
+                        <label>Ulica:</label>
+                        <input type="text" value={editedAdressStreet} onChange={ (e) => setEditedAdressStreet(e.target.value) } />
+                        <label>Kod pocztowy:</label>
+                        <input type="text" value={editedAdressZipCode} onChange={ (e) => setEditedAdressZipCode(e.target.value) } />
+                        <label>Numer lokalu:</label>
+                        <input type="text" value={editedAdressSuite} onChange={ (e) => setEditedAdressSuite(e.target.value) } />
+                        <label>Szerokość geograficzna:</label>
+                        <input type="text" value={editedAdressGeoLat} onChange={ (e) => setEditedAdressGeoLat(e.target.value) } />
+                        <label>Długość geograficzna:</label>
+                        <input type="text" value={editedAdressGeoLng} onChange={ (e) => setEditedAdressGeoLng(e.target.value) } />
+                        <label>Telefon:</label>
+                        <input type="text" value={editedPhone} onChange={ (e) => setEditedPhone(e.target.value) } />
+                        <label>Strona WWW:</label>
+                        <input type="text" value={editedWebsite} onChange={ (e) => setEditedWebsite(e.target.value) } />
+                        <label>Firma:</label>
+                        <input type="text" value={editedCompanyName} onChange={ (e) => setEditedCompanyName(e.target.value) } />
+                        <label>Opis firmy:</label>
+                        <input type="text" value={editedCompanyBs} onChange={ (e) => setEditedCompanyBs(e.target.value) } />
+                        <label>Motto firmy:</label>
+                        <input type="text" value={editedCompanyCatchPhrase} onChange={ (e) => setEditedCompanyCatchPhrase(e.target.value) } />
+                        <div className={styles.buttonContainer}>
+                            <button type="submit">Zapisz zmiany</button>
+                        </div>
+                    </div>
                 </form>
             )}
-            <button onClick={() => setViewMode('albums')}>Albumy</button>
-            <button onClick={() => setViewMode('photos')}>Zdjęcia</button>
+            <div className={styles.viewSwitch}>
+                <button onClick={() => setViewMode('albums')}>Albumy</button>
+                <button onClick={() => setViewMode('photos')}>Zdjęcia</button>
+            </div>
             {viewMode === 'albums' && <AlbumComponent filteredAlbums={filteredAlbums} showManipulateButtons={isCurrentUserProfile} />}
             {viewMode === 'photos' && <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons={isCurrentUserProfile} />}
             <PostComponent filteredPosts={filteredPosts} showManipulateButtons = {isCurrentUserProfile}/>
-            {/* <AlbumComponent filteredAlbums={filteredAlbums} showManipulateButtons = {isCurrentUserProfile} />
-            <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons = {isCurrentUserProfile} /> */}
         </div>
     );
 };

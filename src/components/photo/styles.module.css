@@ -1,51 +1,54 @@
-.wrapper {
+.photoGallery {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px; 
 }
 
-.wrapper .btnSegment {
-    display: flex;
-    align-items: center;
-}
-
-/* Styl dla linku Strona główna */
-.wrapper .homeLink {
-    margin-right: auto; /* Zapewnia, że wszystko po prawej stronie przesunie się do końca */
-}
-
-/* Styl dla linków dodatkowych (dzieci) */
-.wrapper .children {
-    margin-left: auto; /* Zapewnia, że linki zaczynają się od prawej strony */
-    display: flex;
-}
-
-/* Styl dla przycisku Wyloguj */
-.wrapper .btnSegment .btn {
-    margin-left: 10px; /* Odstęp między dodatkowymi linkami a przyciskiem Wyloguj */
-}
-
-/* Pozostałe style */
-.wrapper a,
-.wrapper .btnSegment .aBtn,
-.wrapper .btnSegment .btn {
-    text-decoration: none;
-    color: inherit;
-    background-color: #0693e3;
-    color: #fff;
-    border: 2px solid #0693e3;
+.photoContainer {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    padding: 5px;
-    font-family: 'Roboto';
-    font-size: 16px;
+    text-align: center;
+    flex-basis: calc(15% - 10px);
 }
 
-.wrapper a:hover,
-.wrapper .btnSegment .aBtn:hover,
-.wrapper .btnSegment .btn:hover {
-    background-color: #fff;
-    color: #0693e3;
+.photoDetails {
+    margin-top: 10px;
 }
+
+.photoImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.editForm {
+    margin-bottom: 10px;
+}
+
+.editForm input, .editForm button {
+    margin-right: 10px;
+}
+
+.addButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.addButton input, .addButton button {
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.addButton button {
+    cursor: pointer;
+}
+
+

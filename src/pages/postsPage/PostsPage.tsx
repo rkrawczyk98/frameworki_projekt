@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/UserContext';
-import { usePosts } from '../contexts/PostContext';
-import Post from '../components/post/Post';
-import NavBar from '../components/navbar/NavBar';
-import Comment from '../components/comment/Comment';
+import { useAuth } from '../../contexts/UserContext';
+import { usePosts } from '../../contexts/PostContext';
+import Post from '../../components/post/Post';
+import NavBar from '../../components/navbar/NavBar';
+import Comment from '../../components/comment/Comment';
 
 interface PostViewHelper {
     userId: number;

@@ -63,33 +63,32 @@ const AlbumComponent: React.FC<AlbumComponentProps> = ({ filteredAlbums, showMan
             <h2>Albumy</h2>
             <div>
                 {filteredAlbums.map(album => (
-                    <div key={album.id} onClick={() => handleAlbumClick(album.id)} className={styles.wrapper}>
+                    <div key={album.id} className={styles.wrapper} onClick={() => handleAlbumClick(album.id)}>
                         {editAlbumId === album.id && showManipulateButtons ? (
-                            <>
+                            <div className={styles.editForm}>
                                 <label>Tytuł: </label>
                                 <input value={editAlbumTitle} onChange={e => setEditAlbumTitle(e.target.value)} />
                                 <button onClick={handleSaveEdit}>Zapisz</button>
-                            </>
+                            </div>
                         ) : (
-                            <>
+                            <div className={styles.albumDetails}>
                                 <label>Tytuł: </label>
                                 <span>{album.title}</span>
                                 <label>Numer albumu: </label>
                                 <span>{album.id}</span>
-                                {showManipulateButtons ? <button onClick={() => handleEditAlbum(album)}>Edytuj</button> : null}
-                                {showManipulateButtons ? <button onClick={() => deleteAlbum(album.id)}>Usuń</button> : null}
-                            </>
+                            </div>
                         )}
+                        {selectedAlbumId === album.id && <Photo filteredPhotos={selectedAlbumPhotos} showManipulateButtons={false} />}
                     </div>
                 ))}
             </div>
-            {selectedAlbumId && <Photo filteredPhotos={selectedAlbumPhotos} showManipulateButtons={false} />}
-            {showManipulateButtons ?
-            <div>
-                <label>Tytuł:</label>
-                <input value={newAlbumTitle} onChange={e => setNewAlbumTitle(e.target.value)} />
-                <button onClick={handleAddAlbum}>Dodaj Album</button>
-            </div> : null}
+            {showManipulateButtons &&
+                <div className={styles.addButton}>
+                    <label>Tytuł:</label>
+                    <input value={newAlbumTitle} onChange={e => setNewAlbumTitle(e.target.value)} />
+                    <button onClick={handleAddAlbum}>Dodaj Album</button>
+                </div>
+            }
         </div>
     );
 };

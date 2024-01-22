@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import NavBar from '../components/navbar/NavBar';
+import NavBar from '../../components/navbar/NavBar';
 
 const NotFoundPage: React.FC = () => {
     return (

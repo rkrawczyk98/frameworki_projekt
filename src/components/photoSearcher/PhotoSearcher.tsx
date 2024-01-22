@@ -11,21 +11,7 @@ const PhotoSearcher = () => {
     const [searchUserId, setSearchUserId] = useState('');
     const { photos } = usePhotos();
     const { albums } = useAlbums();
-    const [viewMode, setViewMode] = useState('photos'); // 'photos' lub 'albums'
-
-    // const filteredAlbums = albums.filter(album => {
-    //     const photoById = photos.filter(p => p.id.toString() === searchPhotoId)[0];
-    //     return (searchPhotoId ? albums.filter(a => a.id === photoById.albumId)[0] : true) &&
-    //            (searchAlbumId ? album.id.toString() === searchAlbumId : true) &&
-    //            (searchUserId ? album.userId.toString() === searchUserId : true);
-    // });
-
-    // const filteredPhotos = photos.filter(photo => {
-    //     const albumsByUser = filteredAlbums.filter(album => album.userId.toString() === searchUserId).map(a => a.id);
-    //     return (searchPhotoId ? photo.id.toString() === searchPhotoId : true) &&
-    //            (searchAlbumId ? photo.albumId.toString() === searchAlbumId : true) &&
-    //            (searchUserId ? albumsByUser.includes(photo.albumId) : true);
-    // });
+    const [viewMode, setViewMode] = useState('photos');
 
     const filteredAlbums = albums.filter(album => {
         return (searchAlbumId ? album.id.toString() === searchAlbumId : true) &&
@@ -46,17 +32,19 @@ const PhotoSearcher = () => {
 
 
     return (
-        <div className={styles.photoSearcher}>
+        <div className={styles.photoSearcherContainer}>
             <h2>Wyszukiwarka Zdjęć</h2>
-            <div>
-                <label>ID Zdjęcia: </label>
+            <div className={styles.searchContainer}>
+                <label>Numer zdjęcia: </label>
                 <input value={searchPhotoId} onChange={e => setSearchPhotoId(e.target.value)} placeholder="ID zdjęcia" />
-                <label>ID Albumu: </label>
+                <label>Numer albumu: </label>
                 <input value={searchAlbumId} onChange={e => setSearchAlbumId(e.target.value)} placeholder="ID albumu" />
-                <label>ID Użytkownika: </label>
+                <label>Numer użytkownika: </label>
                 <input value={searchUserId} onChange={e => setSearchUserId(e.target.value)} placeholder="ID użytkownika" />
-                <button onClick={() => setViewMode('photos')}>Zdjęcia</button>
-                <button onClick={() => setViewMode('albums')}>Albumy</button>
+                <div className={styles.switchViewButtons}>
+                    <button onClick={() => setViewMode('photos')}>Zdjęcia</button>
+                    <button onClick={() => setViewMode('albums')}>Albumy</button>
+                </div>
             </div>
             {viewMode === 'photos' && <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons={false} />}
             {viewMode === 'albums' && <AlbumComponent filteredAlbums={albumsFilteredAfterPhotos ? albumsFilteredAfterPhotos : filteredAlbums.filter(a => a.id === filteredPhotos[0].albumId)} showManipulateButtons={false} />}

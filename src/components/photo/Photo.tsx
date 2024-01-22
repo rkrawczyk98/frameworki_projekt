@@ -83,11 +83,11 @@ const PhotoComponent: React.FC<PhotoComponentProps> = ({ filteredPhotos, showMan
     return (
         <div>
             <h2>Zdjęcia</h2>
-            <div>
+            <div className={styles.photoGallery}>
                 {filteredPhotos.map(photo => (
-                    <div key={photo.id}>
+                    <div key={photo.id} className={styles.photoContainer}>
                         {editPhotoId === photo.id && showManipulateButtons ? (
-                            <div>
+                            <div className={styles.editForm}>
                                 <label>Tytuł: </label>
                                 <input value={editPhotoTitle} onChange={e => setEditPhotoTitle(e.target.value)} />
                                 <label>Adres Url postu: </label>
@@ -98,30 +98,40 @@ const PhotoComponent: React.FC<PhotoComponentProps> = ({ filteredPhotos, showMan
                             </div>
                         ) : (
                             <div>
-                                <img src={photo.thumbnailUrl} />
-                                <label>Tytuł:</label>
-                                <span>{photo.title}</span>
-                                {showManipulateButtons ? <button onClick={() => handleEditPhoto(photo)}>Edytuj</button> : null}
-                                {showManipulateButtons ? <button onClick={() => handleDeletePhoto(photo.id)}>Usuń</button> : null}
+                                <img src={photo.thumbnailUrl} alt={photo.title} className={styles.photoImage} />
+                                <div className={styles.photoDetails}>
+                                    <label>Tytuł:</label>
+                                    <span>{photo.title}</span>
+                                </div>
+                                {showManipulateButtons ? (
+                                    <>
+                                        <button onClick={() => handleEditPhoto(photo)}>Edytuj</button>
+                                        <button onClick={() => handleDeletePhoto(photo.id)}>Usuń</button>
+                                    </>
+                                ) : null}
                             </div>
                         )}
                     </div>
                 ))}
             </div>
-            { showManipulateButtons ? <div>
-                <label>Tytuł:</label>
-                <input value={newPhotoTitle} onChange={e => setNewPhotoTitle(e.target.value)} />
-                <label>Numer albumu:</label>
-                <input
-                    value={newPhotoAlbumId !== null ? newPhotoAlbumId.toString() : ''}
-                    onChange={e => setNewPhotoAlbumID(e.target.value ? parseInt(e.target.value, 10) : null)}
-                />
-                <label>Adres Url postu:</label>
-                <input value={newPhotoUrl} onChange={e => setNewPhotoUrl(e.target.value)} />
-                <label>Adres Url miniaturki:</label>
-                <input value={newPhotoThumbnailUrl} onChange={e => setNewPhotoThumbnailUrl(e.target.value)} />
-                <button onClick={handleAddPhoto}>Dodaj Zdjęcie</button>
-            </div> : null}
+            {showManipulateButtons && (
+                <div className={styles.addButton}>
+                    <form>
+                        <label>Tytuł:</label>
+                        <input value={newPhotoTitle} onChange={e => setNewPhotoTitle(e.target.value)} />
+                        <label>Numer albumu:</label>
+                        <input
+                            value={newPhotoAlbumId !== null ? newPhotoAlbumId.toString() : ''}
+                            onChange={e => setNewPhotoAlbumID(e.target.value ? parseInt(e.target.value, 10) : null)}
+                        />
+                        <label>Adres Url postu:</label>
+                        <input value={newPhotoUrl} onChange={e => setNewPhotoUrl(e.target.value)} />
+                        <label>Adres Url miniaturki:</label>
+                        <input value={newPhotoThumbnailUrl} onChange={e => setNewPhotoThumbnailUrl(e.target.value)} />
+                    </form>
+                    <button onClick={handleAddPhoto}>Dodaj Zdjęcie</button>
+                </div>
+            )}
         </div>
     );
 };

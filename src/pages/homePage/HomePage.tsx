@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/UserContext';
-import { usePhotos } from '../contexts/PhotoContext';
-import { useAlbums } from '../contexts/AlbumContext';
-import NavBar from '../components/navbar/NavBar';
-import AlbumComponent from '../components//album/Album';
-import PhotoComponent from '../components/photo/Photo';
-import PhotoSearcher from '../components/photoSearcher/PhotoSearcher';
+import { useAuth } from '../../contexts/UserContext';
+import { usePhotos } from '../../contexts/PhotoContext';
+import { useAlbums } from '../../contexts/AlbumContext';
+import NavBar from '../../components/navbar/NavBar';
+import PhotoSearcher from '../../components/photoSearcher/PhotoSearcher';
 
 const HomePage = () => {
     const { user } = useAuth();
@@ -34,6 +32,7 @@ const HomePage = () => {
                 <NavBar>
                     {!user && <Link to="/login">Logowanie</Link>}
                     {!user && <Link to="/register">Rejestracja</Link>}
+                    <Link to={`/toDosPage`}>Lista aktywności</Link>
                     <Link to={`/postsPage`}>Posty użytkowników</Link>
                     {user && <Link to={`/searchUsers`}>Wyszukiwarka użytkowników</Link>}
                     {user && <Link to={`/user/${user.id}`}>Profil Użytkownika</Link>}

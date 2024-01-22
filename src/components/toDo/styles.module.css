@@ -1,0 +1,62 @@
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.toDo {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+}
+
+.toDoHeader {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.editMode {
+    background-color: #e9ecef;
+}
+
+.inputField {
+    display: flex;
+    width: 400px;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    justify-content: center;
+}
+
+.label {
+    display: flex;
+    margin-top: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    max-width: 120px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.toDo div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}

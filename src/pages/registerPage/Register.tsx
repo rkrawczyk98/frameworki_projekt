@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link , useNavigate } from 'react-router-dom';
-import { User } from '../types/user/User';
-import { useAuth } from '../contexts/UserContext';
-import NavBar from '../components/navbar/NavBar';
+import { User } from '../../types/user/User';
+import { useAuth } from '../../contexts/UserContext';
+import NavBar from '../../components/navbar/NavBar';
 
 interface AccountFormData {
     username: string;
