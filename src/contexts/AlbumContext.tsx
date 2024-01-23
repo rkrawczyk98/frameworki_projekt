@@ -35,8 +35,14 @@ export const AlbumProvider: React.FC<AlbumProviderProps> = ({ children }) => {
             const response = await fetch('https://jsonplaceholder.typicode.com/albums');
             const apiAlbums: Album[] = await response.json();
             const localAlbums: Album[] = JSON.parse(localStorage.getItem('albums') || '[]');
+
+            if (!Array.isArray(localAlbums)) {
+                setAlbums(apiAlbums);
+                return; 
+            }
+
             const newApiComments = apiAlbums.filter(apiAlbum => 
-                !localAlbums.some(localAlbum => localAlbum.id === apiAlbum.id)
+                !localAlbums?.some(localAlbum => localAlbum.id === apiAlbum.id)
             );
             setAlbums([...localAlbums, ...newApiComments]);
         } catch (error) {

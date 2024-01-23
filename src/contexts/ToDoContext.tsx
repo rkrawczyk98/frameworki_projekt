@@ -35,8 +35,14 @@ export const ToDoProvider: React.FC<ToDoProviderProps> = ({ children }) => {
             const response = await fetch('https://jsonplaceholder.typicode.com/toDos');
             const apiToDos: ToDo[] = await response.json();
             const localToDos: ToDo[] = JSON.parse(localStorage.getItem('toDos') || '[]');
+
+            if (!Array.isArray(localToDos)) {
+                setToDos(apiToDos);
+                return; 
+            }
+
             const newApiToDos = apiToDos.filter(apiToDo => 
-                !localToDos.some(localToDo => localToDo.id === apiToDo.id)
+                !localToDos?.some(localToDo => localToDo.id === apiToDo.id)
             );
             setToDos([...localToDos, ...newApiToDos]);
         } catch (error) {

@@ -35,8 +35,12 @@ export const CommentProvider: React.FC<CommentProviderProps> = ({ children }) =>
             const response = await fetch('https://jsonplaceholder.typicode.com/comments');
             const apiComments: Comment[] = await response.json();
             const localComments: Comment[] = JSON.parse(localStorage.getItem('comments') || '[]');
+            if (!Array.isArray(localComments)) {
+                setComments(apiComments);
+                return; 
+            }
             const newApiComments = apiComments.filter(apiComment => 
-                !localComments.some(localComment => localComment.id === apiComment.id)
+                !localComments?.some(localComment => localComment.id === apiComment.id)
             );
             setComments([...localComments, ...newApiComments]);
         } catch (error) {

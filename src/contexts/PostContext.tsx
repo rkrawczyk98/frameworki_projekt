@@ -35,8 +35,14 @@ export const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
             const response = await fetch('https://jsonplaceholder.typicode.com/posts');
             const apiPosts: Post[] = await response.json();
             const localPosts: Post[] = JSON.parse(localStorage.getItem('posts') || '[]');
+
+            if (!Array.isArray(localPosts)) {
+                setPosts(apiPosts);
+                return; 
+            }
+
             const newApiPosts = apiPosts.filter(apiPost => 
-                !localPosts.some(localPost => localPost.id === apiPost.id)
+                !localPosts?.some(localPost => localPost.id === apiPost.id)
             );
             setPosts([...localPosts, ...newApiPosts]);
         } catch (error) {

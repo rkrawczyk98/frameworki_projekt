@@ -13,19 +13,19 @@ const PhotoSearcher = () => {
     const { albums } = useAlbums();
     const [viewMode, setViewMode] = useState('photos');
 
-    const filteredAlbums = albums.filter(album => {
+    const filteredAlbums = albums?.filter(album => {
         return (searchAlbumId ? album.id.toString() === searchAlbumId : true) &&
                (searchUserId ? album.userId.toString() === searchUserId : true);
     });
     
-    const filteredPhotos = photos.filter(photo => {
+    const filteredPhotos = photos?.filter(photo => {
         return (searchPhotoId ? photo.id.toString() === searchPhotoId : true) &&
                filteredAlbums.some(album => album.id === photo.albumId);
     });
 
     let albumsFilteredAfterPhotos;
     if (viewMode === 'albums' && searchPhotoId) {
-    albumsFilteredAfterPhotos = filteredAlbums.filter(a => a.id === filteredPhotos[0]?.albumId);
+    albumsFilteredAfterPhotos = filteredAlbums?.filter(a => a.id === filteredPhotos[0]?.albumId);
     } else {
     albumsFilteredAfterPhotos = filteredAlbums;
     }

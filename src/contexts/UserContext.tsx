@@ -50,8 +50,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             const response = await fetch('https://jsonplaceholder.typicode.com/users');
             const apiUsers: User[] = await response.json();
             const localUsers: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+
+            if (!Array.isArray(localUsers)) {
+                setUsers(apiUsers);
+                return; 
+            }
+
             const newApiUsers = apiUsers.filter(apiUser => 
-                !localUsers.some(localUser => localUser.id === apiUser.id)
+                !localUsers?.some(localUser => localUser.id === apiUser.id)
             );
             setUsers([...localUsers, ...newApiUsers]);
         } catch (error) {

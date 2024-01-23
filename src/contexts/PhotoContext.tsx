@@ -35,8 +35,13 @@ export const PhotoProvider: React.FC<PhotoProviderProps> = ({ children }) => {
             const response = await fetch('https://jsonplaceholder.typicode.com/photos');
             const apiPhotos: Photo[] = await response.json();
             const localPhotos: Photo[] = JSON.parse(localStorage.getItem('photos') || '[]');
+
+            if (!Array.isArray(localPhotos)) {
+                setPhotos(apiPhotos);
+                return; 
+            }
             const newApiPhotos = apiPhotos.filter(apiPhoto => 
-                !localPhotos.some(localPhoto => localPhoto.id === apiPhoto.id)
+                !localPhotos?.some(localPhoto => localPhoto.id === apiPhoto.id)
             );
             setPhotos([...localPhotos, ...newApiPhotos]);
         } catch (error) {

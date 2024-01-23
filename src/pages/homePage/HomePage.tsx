@@ -3,14 +3,29 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/UserContext';
 import { usePhotos } from '../../contexts/PhotoContext';
 import { useAlbums } from '../../contexts/AlbumContext';
+import { useComments } from '../../contexts/CommentContext';
+import { usePosts } from '../../contexts/PostContext';
+import { useToDos } from '../../contexts/ToDoContext';
 import NavBar from '../../components/navbar/NavBar';
 import PhotoSearcher from '../../components/photoSearcher/PhotoSearcher';
 
 const HomePage = () => {
-    const { user } = useAuth();
-    const { albums } = useAlbums();
-    const { photos } = usePhotos();
+    const { user, fetchUsers } = useAuth();
+    const { fetchAlbums } = useAlbums();
+    const { fetchPhotos } = usePhotos();
+    const { fetchComments } = useComments();
+    const { fetchPosts } = usePosts();
+    const { fetchToDos } = useToDos();
     const [viewMode, setViewMode] = useState('albums'); // Możliwe wartości: 'albums', 'photos'
+
+    useEffect(() => {
+        fetchUsers();
+        fetchAlbums();
+        fetchPhotos();
+        fetchComments();
+        fetchPosts();
+        fetchToDos();
+    }, []);
 
     // useEffect(() => {
     //     // Pobieranie danych ze zdjęciami

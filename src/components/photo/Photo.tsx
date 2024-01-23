@@ -26,8 +26,8 @@ const PhotoComponent: React.FC<PhotoComponentProps> = ({ filteredPhotos, showMan
     const handleAddPhoto = () => {
         if(user?.id){
         const newPhoto: Photo = {
-            albumId: newPhotoAlbumId ? newPhotoAlbumId : Math.max(...albums.map(a => a.id), 0) + 1,
-            id: Math.max(...photos.map(p => p.id), 0) + 1,
+            albumId: newPhotoAlbumId ? newPhotoAlbumId : Math.max(...albums?.map(a => a.id), 0) + 1,
+            id: Math.max(...photos?.map(p => p.id), 0) + 1,
             title: newPhotoTitle,
             url: newPhotoUrl,
             thumbnailUrl: newPhotoThumbnailUrl
@@ -84,7 +84,7 @@ const PhotoComponent: React.FC<PhotoComponentProps> = ({ filteredPhotos, showMan
         <div>
             <h2>Zdjęcia</h2>
             <div className={styles.photoGallery}>
-                {filteredPhotos.map(photo => (
+                {filteredPhotos?.map(photo => (
                     <div key={photo.id} className={styles.photoContainer}>
                         {editPhotoId === photo.id && showManipulateButtons ? (
                             <div className={styles.editForm}>

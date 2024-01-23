@@ -33,7 +33,7 @@ const AlbumComponent: React.FC<AlbumComponentProps> = ({ filteredAlbums, showMan
         if(user?.id){
             const newAlbum: Album = {
                 userId: user.id,
-                id: Math.max(...albums.map(a => a.id), 0) + 1,
+                id: Math.max(...albums?.map(a => a.id), 0) + 1,
                 title: newAlbumTitle,
             };
             addAlbum(newAlbum);
@@ -62,7 +62,7 @@ const AlbumComponent: React.FC<AlbumComponentProps> = ({ filteredAlbums, showMan
         <div>
             <h2>Albumy</h2>
             <div>
-                {filteredAlbums.map(album => (
+                {filteredAlbums?.map(album => (
                     <div key={album.id} className={styles.wrapper} onClick={() => handleAlbumClick(album.id)}>
                         {editAlbumId === album.id && showManipulateButtons ? (
                             <div className={styles.editForm}>
