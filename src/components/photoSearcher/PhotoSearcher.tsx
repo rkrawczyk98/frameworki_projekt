@@ -46,8 +46,8 @@ const PhotoSearcher = () => {
                     <button onClick={() => setViewMode('albums')}>Albumy</button>
                 </div>
             </div>
-            {viewMode === 'photos' && <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons={false} />}
-            {viewMode === 'albums' && <AlbumComponent filteredAlbums={albumsFilteredAfterPhotos ? albumsFilteredAfterPhotos : filteredAlbums.filter(a => a.id === filteredPhotos[0].albumId)} showManipulateButtons={false} />}
+            {viewMode === 'photos' && <PhotoComponent filteredPhotos={filteredPhotos} showManipulateButtons={true} />}
+            {viewMode === 'albums' && <AlbumComponent filteredAlbums={albumsFilteredAfterPhotos ? albumsFilteredAfterPhotos : filteredAlbums.filter(a => a.id === filteredPhotos[0].albumId)} showManipulateButtons={true} />}
         </div>
     );
 };
