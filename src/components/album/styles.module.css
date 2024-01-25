@@ -1,0 +1,60 @@
+/* styles.module.css */
+.wrapper {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.wrapper:hover {
+    background-color: #f3f3f3;
+}
+
+.albumDetails {
+    margin-bottom: 10px;
+}
+
+.albumDetails label {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.albumDetails span {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.editForm {
+    margin-bottom: 10px;
+}
+
+.editForm input {
+    margin-right: 10px;
+}
+
+.editForm button {
+    cursor: pointer;
+}
+
+.addButton {
+    margin-top: 20px;
+}
+
+.addButton label {
+    margin-right: 10px;
+}
+
+.addButton input {
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.addButton button {
+    cursor: pointer;
+}

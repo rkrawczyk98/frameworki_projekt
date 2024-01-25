@@ -1,0 +1,54 @@
+.photoGallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px; 
+}
+
+.photoContainer {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    flex-basis: calc(15% - 10px);
+}
+
+.photoDetails {
+    margin-top: 10px;
+}
+
+.photoImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.editForm {
+    margin-bottom: 10px;
+}
+
+.editForm input, .editForm button {
+    margin-right: 10px;
+}
+
+.addButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.addButton input, .addButton button {
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.addButton button {
+    cursor: pointer;
+}
+
+

@@ -3,13 +3,32 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from './contexts/UserContext';
+import { AlbumProvider } from './contexts/AlbumContext';
+import { PhotoProvider } from './contexts/PhotoContext';
+import { CommentProvider } from './contexts/CommentContext';
+import { ToDoProvider } from './contexts/ToDoContext';
+import { PostProvider } from './contexts/PostContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <CommentProvider>
+        <ToDoProvider>
+          <PostProvider>
+            <AlbumProvider>
+              <PhotoProvider>
+                <App />
+              </PhotoProvider>
+            </AlbumProvider>
+          </PostProvider>
+        </ToDoProvider>
+      </CommentProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
 

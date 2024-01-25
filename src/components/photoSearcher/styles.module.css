@@ -1,0 +1,46 @@
+.photoSearcherContainer {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.photoSearcherContainer h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.searchContainer input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.searchContainer label {
+    margin-left: 20px;
+}
+
+/* .switchViewButtons h3 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+} */
+
+.switchViewButtons {
+    margin-bottom: 20px;
+}
+
+.switchViewButtons button {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.switchViewButtons button:hover {
+    background-color: #0056b3;
+}
