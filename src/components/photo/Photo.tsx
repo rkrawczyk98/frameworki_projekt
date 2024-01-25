@@ -86,7 +86,7 @@ const PhotoComponent: React.FC<PhotoComponentProps> = ({ filteredPhotos, showMan
             <div className={styles.photoGallery}>
                 {filteredPhotos?.map(photo => (
                     <div key={photo.id} className={styles.photoContainer}>
-                        {editPhotoId === photo.id && showManipulateButtons && user && photo.albumId === albums?.filter(a=>a.userId === user?.id)[0].id ? (
+                        {editPhotoId === photo.id && showManipulateButtons && user && photo.albumId === albums?.filter(a=>a.userId === user?.id)[0]?.id ? (
                             <div className={styles.editForm}>
                                 <label>Tytuł: </label>
                                 <input value={editPhotoTitle} onChange={e => setEditPhotoTitle(e.target.value)} />
@@ -103,7 +103,7 @@ const PhotoComponent: React.FC<PhotoComponentProps> = ({ filteredPhotos, showMan
                                     <label>Tytuł:</label>
                                     <span>{photo.title}</span>
                                 </div>
-                                {showManipulateButtons && user && photo.albumId === albums?.filter(a=>a.userId === user?.id)[0].id ? (
+                                {showManipulateButtons && user && photo.albumId === albums?.filter(a=>a.userId === user?.id)[0]?.id ? (
                                     <>
                                         <button onClick={() => handleEditPhoto(photo)}>Edytuj</button>
                                         <button onClick={() => handleDeletePhoto(photo.id)}>Usuń</button>
