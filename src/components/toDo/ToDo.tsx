@@ -58,8 +58,8 @@ const ToDoComponent: React.FC<ToDoComponentProps> = ({ filteredToDos, showManipu
                             <div className={styles.toDoContent}>
                                 <label>Tytuł:</label>
                                 <input className={styles.inputField} value={editToDoTitle} onChange={e => setEditToDoTitle(e.target.value)} />
-                                <label>Status:</label>
-                                <input type="checkbox" checked={editCompleted} onChange={e => setEditCompleted(e.target.checked)} />
+                                <label>Status: <input type="checkbox" checked={editCompleted} onChange={e => setEditCompleted(e.target.checked)} /></label>
+                                
                                 <div className={styles.buttonContainer}>
                                     <button className={styles.button} onClick={handleSaveEdit}>Zapisz</button>
                                 </div>
