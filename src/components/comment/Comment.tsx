@@ -29,10 +29,10 @@ const CommentComponent: React.FC<CommentComponentProps> = ({ postId }) => {
     };
 
     return (
-        <div>
+        <div className='comment-container'>
             {postComments.map(comment => (
-                <div key={comment.id}>
-                    <p>{comment.body} - {comment.name}</p>
+                <div key={comment.id} className='comment'>
+                    <p><b>{comment.name} -    </b>{comment.body}</p>
                     {user && user.email === comment.email ? (
                         <button onClick={() => deleteComment(comment.id)}>Usuń</button>
                     ) : null}

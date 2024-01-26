@@ -51,29 +51,30 @@ const ToDoComponent: React.FC<ToDoComponentProps> = ({ filteredToDos, showManipu
 
     return (
         <div className={styles.container}>
-            <h2>Zadania</h2>
             <div>
                 {filteredToDos.map(toDo => (
                     <div key={toDo.id} className={editToDoId === toDo.id ? `${styles.toDo} ${styles.editMode}` : styles.toDo}>
                         {editToDoId === toDo.id && showManipulateButtons ? (
-                            <>
+                            <div className={styles.toDoContent}>
                                 <label>Tytuł:</label>
                                 <input className={styles.inputField} value={editToDoTitle} onChange={e => setEditToDoTitle(e.target.value)} />
                                 <label>Status:</label>
                                 <input type="checkbox" checked={editCompleted} onChange={e => setEditCompleted(e.target.checked)} />
-                                <button className={styles.button} onClick={handleSaveEdit}>Zapisz</button>
-                            </>
+                                <div className={styles.buttonContainer}>
+                                    <button className={styles.button} onClick={handleSaveEdit}>Zapisz</button>
+                                </div>
+                            </div>
                         ) : (
-                            <>
+                            <div className={styles.toDoContent}>
                                 <div className={styles.toDoHeader}>Tytuł: <span>{toDo.title}</span></div>
                                 <div>Status: <span>{toDo.completed ? 'Wykonane' : 'Niewykonane'}</span></div>
                                 {showManipulateButtons && (
-                                    <div>
+                                    <div className={styles.buttonContainer}>
                                         <button className={styles.button} onClick={() => handleEditToDo(toDo)}>Edytuj</button>
                                         <button className={styles.button} onClick={() => deleteToDo(toDo.id)}>Usuń</button>
                                     </div>
                                 )}
-                            </>
+                            </div>
                         )}
                     </div>
                 ))}

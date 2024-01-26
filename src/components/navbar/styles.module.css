@@ -2,7 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+    background-color: lightgray;
 }
 
 .wrapper .btnSegment {
@@ -31,16 +32,15 @@
 .wrapper .btnSegment .aBtn,
 .wrapper .btnSegment .btn {
     text-decoration: none;
-    color: inherit;
-    background-color: #0693e3;
-    color: #fff;
-    border: 2px solid #0693e3;
+    background-color: rgba(1, 1, 1, 0);
+    color: black;
+    border: 10px solid rgba(1, 1, 1, 0);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
     padding: 5px;
     font-family: 'Roboto';
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .wrapper a:hover,

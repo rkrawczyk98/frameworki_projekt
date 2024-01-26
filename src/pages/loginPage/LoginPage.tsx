@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link , useNavigate } from 'react-router-dom';
 import { useAuth }  from '../../contexts/UserContext';
 import NavBar from '../../components/navbar/NavBar';
+import "./custom.css"
 
 interface LoginFormData {
     username: string;

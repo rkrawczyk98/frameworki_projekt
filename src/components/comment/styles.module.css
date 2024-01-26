@@ -49,3 +49,29 @@
     background-color: #fff;
     color: #0693e3;
 }
+
+.comment-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment {
+    border: 1px solid #0693e3;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.comment button {
+    margin-top: 5px;
+    background-color: #0693e3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.comment button:hover {
+    background-color: #fff;
+    color: #0693e3;
+}
