@@ -20,7 +20,7 @@ const PhotoSearcher = () => {
     
     const filteredPhotos = photos?.filter(photo => {
         return (searchPhotoId ? photo.id.toString() === searchPhotoId : true) &&
-               filteredAlbums.some(album => album.id === photo.albumId);
+               filteredAlbums?.some(album => album.id === photo.albumId);
     });
 
     let albumsFilteredAfterPhotos;
