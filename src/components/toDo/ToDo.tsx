@@ -78,13 +78,13 @@ const ToDoComponent: React.FC<ToDoComponentProps> = ({ filteredToDos, showManipu
                     </div>
                 ))}
             </div>
-            {showManipulateButtons && user && (
+            {/* {showManipulateButtons && user && (
                 <div>
                     <label className={styles.label}>Tytuł:</label>
                     <input className={styles.inputField} value={newToDoTitle} onChange={e => setNewToDoTitle(e.target.value)} />
                     <button className={styles.button} onClick={handleAddToDo}>Dodaj Zadanie</button>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };
