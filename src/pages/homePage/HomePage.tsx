@@ -8,6 +8,7 @@ import { usePosts } from '../../contexts/PostContext';
 import { useToDos } from '../../contexts/ToDoContext';
 import NavBar from '../../components/navbar/NavBar';
 import PhotoSearcher from '../../components/photoSearcher/PhotoSearcher';
+import "./custom.css"
 
 const HomePage = () => {
     const { user, fetchUsers } = useAuth();

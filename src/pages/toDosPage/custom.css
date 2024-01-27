@@ -1,0 +1,32 @@
+.x {
+    background-color: rgb(82,82,82);
+    background: linear-gradient(90deg, rgba(82,82,82,1) 0%, rgba(195,188,188,1) 50%, rgba(82,82,82,1) 100%);
+
+}
+
+.button {
+    text-decoration: none;
+    background-color: lightgray;
+    color: black;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 5px;
+    font-family: 'Roboto';
+    font-size: 20px;
+    margin: 15px;
+}
+
+.button:hover {
+    background-color: #fff;
+    color: #0693e3;
+}
+
+input {
+    width: 200px;
+    padding: 5px;
+    margin: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}

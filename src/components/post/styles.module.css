@@ -1,4 +1,3 @@
-/* styles.module.css */
 .container {
     padding: 10px;
 }
@@ -16,6 +15,9 @@
 
 .postBody {
     margin-bottom: 10px;
+    text-align: left;
+    display: block;
+    clear: both;
 }
 
 .button {
