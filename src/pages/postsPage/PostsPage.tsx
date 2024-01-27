@@ -53,9 +53,11 @@ const PostPage = () => {
             </header>
 
             <h1>Posty</h1>
+            
             {user && (
+                
                 <div className="x">
-                    <h3>Dodaj nowy post</h3>
+                    
                     <input
                         type="text"
                         value={newPostTitle}
@@ -77,8 +79,8 @@ const PostPage = () => {
                     <h2>{post.title}</h2>
                     <div className="postBodyContainer">
                         <p>{post.body}</p>
+                        <p>Autor: {post.authorName}</p>
                     </div>
-                    <p>Autor: {post.authorName}</p>
                     <Comment postId={post.id} />
                 </div>
             ))}

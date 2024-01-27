@@ -1,26 +1,32 @@
-.x {
+
+.comment-container {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    justify-content: center;
+    flex-direction: column;
 }
 
-.postBodyContainer {
-    border: 1px solid black; 
-    padding: 10px; 
-    margin: 10px 0; 
+.comment {
+    margin-bottom: 3px;
 }
-.inputField {
+.comment-container button {
+    margin-left: 10px;
+}
+
+.z {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.z textarea {
     height: 20px;
     width: 400px;
     padding: 10px;
     margin: 20px;
     border-radius: 4px;
     border: 1px solid #ddd;
-
 }
 
-button {
+.z button {
     text-decoration: none;
     background-color: lightgray;
     color: black;
@@ -31,17 +37,10 @@ button {
     padding: 5px;
     font-family: 'Roboto';
     font-size: 20px;
+    width:200px;
 }
 
-button:hover {
+.z button:hover {
     background-color: #fff;
     color: #0693e3;
-}
-
-.postContainer {
-    margin-bottom: 20px;
-}
-
-h3 {
-    margin: 20px;
 }
