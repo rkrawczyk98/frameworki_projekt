@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/UserContext';
 import { useToDos } from '../../contexts/ToDoContext';
 import ToDoComponent from '../../components/toDo/ToDo';
 import NavBar from '../../components/navbar/NavBar';
+import "./custom.css"
 
 interface ToDoViewHelper {
     ownerName: string;
@@ -55,16 +56,9 @@ const ToDosPage = () => {
                         onChange={(e) => setNewToDoTitle(e.target.value)}
                         placeholder="Tytuł zadania"
                     />
-                    <button onClick={handleAddToDo}>Dodaj Zadanie</button>
+                    <button className="button" onClick={handleAddToDo}>Dodaj Zadanie</button>
                 </div>
             )}
-            {/* {userToDos.map(toDo => (
-                <div key={toDo.id}>
-                    <h2>{toDo.title}</h2>
-                    <p>Status: {toDo.completed ? 'Ukończone' : 'Niewykonane'}</p>
-                    <p>Właściciel: {toDo.ownerName}</p>
-                </div>
-            ))} */}
             <ToDoComponent filteredToDos={userToDos} showManipulateButtons={!!user} />
         </div>
     );

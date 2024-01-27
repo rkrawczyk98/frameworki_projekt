@@ -4,6 +4,7 @@ import { usePosts } from '../../contexts/PostContext';
 import Post from '../../components/post/Post';
 import NavBar from '../../components/navbar/NavBar';
 import Comment from '../../components/comment/Comment';
+import "./custom.css"
 
 interface PostViewHelper {
     userId: number;
@@ -47,30 +48,39 @@ const PostPage = () => {
 
     return (
         <div>
-            <NavBar />
-            <h1>Posty</h1>            
+            <header>
+                <NavBar />
+            </header>
+
+            <h1>Posty</h1>
+            
             {user && (
-                <div>
-                    <h3>Dodaj nowy post</h3>
+                
+                <div className="x">
+                    
                     <input
                         type="text"
                         value={newPostTitle}
                         onChange={(e) => setNewPostTitle(e.target.value)}
                         placeholder="Tytuł postu"
+                        className="inputField"
                     />
                     <textarea
                         value={newPostBody}
                         onChange={(e) => setNewPostBody(e.target.value)}
                         placeholder="Treść postu"
+                        className="inputField"
                     />
-                    <button onClick={handleAddPost}>Dodaj Post</button>
+                    <button onClick={handleAddPost} className="button">Dodaj Post</button>
                 </div>
             )}
             {userPosts.map(post => (
-                <div key={post.id}>
+                <div key={post.id} className="postContainer">
                     <h2>{post.title}</h2>
-                    <p>{post.body}</p>
-                    <p>Autor: {post.authorName}</p>
+                    <div className="postBodyContainer">
+                        <p>{post.body}</p>
+                        <p>Autor: {post.authorName}</p>
+                    </div>
                     <Comment postId={post.id} />
                 </div>
             ))}

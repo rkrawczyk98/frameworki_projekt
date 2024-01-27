@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useComments } from '../../contexts/CommentContext';
 import { Comment } from '../../types/Comment';
 import { useAuth } from '../../contexts/UserContext';
+import "./styles.css"
 
 interface CommentComponentProps {
     postId: number;
@@ -29,17 +30,18 @@ const CommentComponent: React.FC<CommentComponentProps> = ({ postId }) => {
     };
 
     return (
-        <div>
+        <div className='comment-container'>
+            <h3>Komentarze</h3>
             {postComments.map(comment => (
-                <div key={comment.id}>
-                    <p>{comment.body} - {comment.name}</p>
-                    {user && user.email === comment.email ? (
+                <div key={comment.id} className='comment'>
+                    <p><b>{comment.name} - </b>{comment.body}{user && user.email === comment.email ? (
                         <button onClick={() => deleteComment(comment.id)}>Usuń</button>
-                    ) : null}
+                    ) : null}</p>
+                    
                 </div>
             ))}
             {user && (
-                <div>
+                <div className="z">
                     <textarea
                         value={newCommentBody}
                         onChange={e => setNewCommentBody(e.target.value)}

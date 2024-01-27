@@ -1,0 +1,46 @@
+
+.comment-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment {
+    margin-bottom: 3px;
+}
+.comment-container button {
+    margin-left: 10px;
+}
+
+.z {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.z textarea {
+    height: 20px;
+    width: 400px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.z button {
+    text-decoration: none;
+    background-color: lightgray;
+    color: black;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 5px;
+    font-family: 'Roboto';
+    font-size: 20px;
+    width:200px;
+}
+
+.z button:hover {
+    background-color: #fff;
+    color: #0693e3;
+}
