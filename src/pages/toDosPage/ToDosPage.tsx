@@ -58,13 +58,6 @@ const ToDosPage = () => {
                     <button onClick={handleAddToDo}>Dodaj Zadanie</button>
                 </div>
             )}
-            {/* {userToDos.map(toDo => (
-                <div key={toDo.id}>
-                    <h2>{toDo.title}</h2>
-                    <p>Status: {toDo.completed ? 'Ukończone' : 'Niewykonane'}</p>
-                    <p>Właściciel: {toDo.ownerName}</p>
-                </div>
-            ))} */}
             <ToDoComponent filteredToDos={userToDos} showManipulateButtons={!!user} />
         </div>
     );

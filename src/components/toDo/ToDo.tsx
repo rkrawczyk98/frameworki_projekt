@@ -55,7 +55,7 @@ const ToDoComponent: React.FC<ToDoComponentProps> = ({ filteredToDos, showManipu
             <div>
                 {filteredToDos.map(toDo => (
                     <div key={toDo.id} className={editToDoId === toDo.id ? `${styles.toDo} ${styles.editMode}` : styles.toDo}>
-                        {editToDoId === toDo.id && showManipulateButtons ? (
+                        {editToDoId === toDo.id && showManipulateButtons && user && user?.id == toDo.userId ? (
                             <>
                                 <label>Tytuł:</label>
                                 <input className={styles.inputField} value={editToDoTitle} onChange={e => setEditToDoTitle(e.target.value)} />
@@ -67,7 +67,7 @@ const ToDoComponent: React.FC<ToDoComponentProps> = ({ filteredToDos, showManipu
                             <>
                                 <div className={styles.toDoHeader}>Tytuł: <span>{toDo.title}</span></div>
                                 <div>Status: <span>{toDo.completed ? 'Wykonane' : 'Niewykonane'}</span></div>
-                                {showManipulateButtons && (
+                                {showManipulateButtons && user && user?.id == toDo.userId && (
                                     <div>
                                         <button className={styles.button} onClick={() => handleEditToDo(toDo)}>Edytuj</button>
                                         <button className={styles.button} onClick={() => deleteToDo(toDo.id)}>Usuń</button>
@@ -78,7 +78,7 @@ const ToDoComponent: React.FC<ToDoComponentProps> = ({ filteredToDos, showManipu
                     </div>
                 ))}
             </div>
-            {showManipulateButtons && (
+            {showManipulateButtons && user && (
                 <div>
                     <label className={styles.label}>Tytuł:</label>
                     <input className={styles.inputField} value={newToDoTitle} onChange={e => setNewToDoTitle(e.target.value)} />
