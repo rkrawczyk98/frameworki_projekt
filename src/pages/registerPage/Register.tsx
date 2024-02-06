@@ -3,7 +3,6 @@ import { Link , useNavigate } from 'react-router-dom';
 import { User } from '../../types/user/User';
 import { useAuth } from '../../contexts/UserContext';
 import NavBar from '../../components/navbar/NavBar';
-import "./custom.css"
 
 interface AccountFormData {
     username: string;
@@ -83,7 +82,9 @@ const CreateAccount = () => {
 
     return (
         <div className="register-page">
-            <NavBar></NavBar>
+            <header className='wrapper'>
+                <NavBar/>
+            </header>
             <h1>Utwórz Konto</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">

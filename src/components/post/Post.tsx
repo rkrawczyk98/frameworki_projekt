@@ -75,7 +75,7 @@ const PostComponent: React.FC<PostComponentProps> = ({filteredPosts, showManipul
                 ))}
             </div>
             {showManipulateButtons ? (
-                <div className={styles.addButton}>
+                <div>
                     <label className={styles.label}>Tytuł:</label>
                     <input className={styles.inputField} value={newPostTitle} onChange={e => setNewPostTitle(e.target.value)} />
                     <label className={styles.label}>Treść:</label>

@@ -4,7 +4,6 @@ import { usePosts } from '../../contexts/PostContext';
 import Post from '../../components/post/Post';
 import NavBar from '../../components/navbar/NavBar';
 import Comment from '../../components/comment/Comment';
-import "./custom.css"
 
 interface PostViewHelper {
     userId: number;
@@ -48,39 +47,32 @@ const PostPage = () => {
 
     return (
         <div>
-            <header>
-                <NavBar />
+            <header className='wrapper'>
+                <NavBar/>
             </header>
-
-            <h1>Posty</h1>
-            
+            <h1>Posty</h1>            
             {user && (
-                
-                <div className="x">
-                    
+                <div>
+                    <h3>Dodaj nowy post</h3>
                     <input
                         type="text"
                         value={newPostTitle}
                         onChange={(e) => setNewPostTitle(e.target.value)}
                         placeholder="Tytuł postu"
-                        className="inputField"
                     />
                     <textarea
                         value={newPostBody}
                         onChange={(e) => setNewPostBody(e.target.value)}
                         placeholder="Treść postu"
-                        className="inputField"
                     />
-                    <button onClick={handleAddPost} className="button">Dodaj Post</button>
+                    <button onClick={handleAddPost}>Dodaj Post</button>
                 </div>
             )}
             {userPosts.map(post => (
-                <div key={post.id} className="postContainer">
+                <div key={post.id}>
                     <h2>{post.title}</h2>
-                    <div className="postBodyContainer">
-                        <p>{post.body}</p>
-                        <p>Autor: {post.authorName}</p>
-                    </div>
+                    <p>{post.body}</p>
+                    <p>Autor: {post.authorName}</p>
                     <Comment postId={post.id} />
                 </div>
             ))}

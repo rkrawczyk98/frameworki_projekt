@@ -2,48 +2,89 @@
     margin: 0 auto;
     padding: 20px;
     max-width: 800px;
+    gap: 10px;
 }
 
-
 .toDo {
-    display: flex;
-    flex-direction: column;
-    background-color: #f4f4f4;
+    background-color: #ddd1;
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.toDoContent {
+    transition: 0.2s;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align to the left */
 }
 
-.toDoHeader {
-    font-weight: bold;
-    margin-bottom: 5px;
+.toDo:hover {
+    background-color: #ddd2;
 }
 
-.buttonContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+.editMode,
+.editMode:hover {
+    background-color: hsl(181, 100%, 10%);
 }
 
-.editMode {
-    background-color: #e9ecef;
+.inputField,
+.title {
+    display: block;
+    margin: 0 10px;
 }
 
 .inputField {
+    min-width: 0;
     display: flex;
     width: 400px;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    
+    background-color: transparent;
+    border: none;
+    color: white;
+    justify-content: center;
+    outline: none;
+}
+
+.inputField,
+.toDoHeader {
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.inputField {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.faIconContainer {
+    display: flex;
+    justify-content: center;
+    min-width: 40px;
+}
+
+.faIconCheck,
+.faIconX {
+    margin: 10px;
+    height: 25px;
+    aspect-ratio: 1;
+}
+
+.faIconX {
+    color: red;
+}
+
+.faIconCheck {
+    color: green;
+}
+
+.faIconSave {
+    color: grey;
+    transition: 0.2s;
+}
+
+.faIconSave:hover {
+    color: greenyellow;
+}
+
+.button:hover {
+    color: white;
 }
 
 .label {
@@ -51,29 +92,39 @@
     margin-top: 10px;
 }
 
-.button {
-    text-decoration: none;
-    background-color: lightgray;
-    color: black;
-    border: 1px solid lightgray;
-    border-radius: 5px;
+.checkbox {
+    display: none;
+}
+
+.checkbox ~ .checkboxIconLabelX {
+    display: block;
     cursor: pointer;
-    transition: background-color 0.3s;
-    padding: 5px;
-    font-family: 'Roboto';
-    font-size: 20px;
-    margin: 5px;
 }
 
-.button:hover {
-    background-color: #fff;
-    color: #0693e3;
+.checkbox ~ .checkboxIconLabelCheck {
+    display: none;
 }
 
+.checkbox:checked ~ .checkboxIconLabelCheck {
+    display: block;
+    cursor: pointer;
+}
 
-.toDo div {
+.checkbox:checked ~ .checkboxIconLabelX {
+    display: none;
+}
+
+.button {
+    padding-left: 25px;
+    background-color: transparent;
+    color: grey;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btnWrapper {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
+    margin-left: auto;
+    margin-right: 10px;
 }

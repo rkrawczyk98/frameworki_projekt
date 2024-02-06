@@ -24,6 +24,7 @@
 
 .inputField {
     margin-bottom: 10px;
+    width: 100%;
     padding: 5px;
 }
 
@@ -34,21 +35,4 @@
 .label {
     display: block;
     margin-bottom: 5px;
-}
-.addButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.addButton input, .addButton button {
-    margin-right: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.addButton button {
-    cursor: pointer;
 }

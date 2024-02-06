@@ -2,17 +2,21 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-start;
     gap: 10px; 
 }
 
 .photoContainer {
-    border: 1px solid #ddd;
+    border: 1px solid #ddd3;
     padding: 10px;
-    margin-bottom: 10px;
     border-radius: 5px;
+    background-color: rgba(221, 221, 221, 0.027);
     text-align: center;
     flex-basis: calc(15% - 10px);
+    transition: .2s;
+}
+
+.photoContainer:hover {
+    background-color: #ddd1;
 }
 
 .photoDetails {

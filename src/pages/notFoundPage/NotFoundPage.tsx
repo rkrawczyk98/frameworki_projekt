@@ -5,7 +5,9 @@ import NavBar from '../../components/navbar/NavBar';
 const NotFoundPage: React.FC = () => {
     return (
         <div className="not-found-page">
-            <NavBar></NavBar>
+            <header className='wrapper'>
+                <NavBar/>
+            </header>
             <h1>404</h1>
             <h2>Strona nie znaleziona</h2>
             <p>Przepraszamy, strona, której szukasz, nie istnieje.</p>

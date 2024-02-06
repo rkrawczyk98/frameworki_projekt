@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link , useNavigate } from 'react-router-dom';
 import { useAuth }  from '../../contexts/UserContext';
 import NavBar from '../../components/navbar/NavBar';
-import "./custom.css"
 
 interface LoginFormData {
     username: string;
@@ -37,9 +36,12 @@ const LoginPage: React.FC = () => {
 
     return (
         <div className="login-page">
-            <NavBar>
-                {!user && <Link to="/register">Rejestracja</Link>}
-            </NavBar>
+            <header>            
+                <NavBar>
+                    {!user && <Link to="/register">Rejestracja</Link>}
+                </NavBar>
+            </header>
+
             <form onSubmit={handleSubmit}>
                 <h2>Logowanie</h2>
                 <div className="form-group">

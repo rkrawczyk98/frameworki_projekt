@@ -8,7 +8,6 @@ import { usePosts } from '../../contexts/PostContext';
 import { useToDos } from '../../contexts/ToDoContext';
 import NavBar from '../../components/navbar/NavBar';
 import PhotoSearcher from '../../components/photoSearcher/PhotoSearcher';
-import "./custom.css"
 
 const HomePage = () => {
     const { user, fetchUsers } = useAuth();
@@ -42,29 +41,37 @@ const HomePage = () => {
     //     fetchPhotos();
     // }, []);
 
+    window.addEventListener("scroll", () => {
+
+        let navbar = document.querySelector("header")
+        if(window.pageYOffset >= 1) {
+            navbar?.classList.add('scroll-wrapper')
+        }
+        else if(window.scrollY == 0) {
+            navbar?.classList.remove('scroll-wrapper')
+        }
+    })
+
+    // .scroll-wrapper {
+    //     background-color: hsl(181, 100%, 10%);
+    //     border-bottom: 1px solid white; 
+    //   }
+
     return (
         <div className="home-page">
             <header>
                 <NavBar>
-                    {!user && <Link to="/login">Logowanie</Link>}
-                    {!user && <Link to="/register">Rejestracja</Link>}
                     <Link to={`/toDosPage`}>Lista aktywności</Link>
                     <Link to={`/postsPage`}>Posty użytkowników</Link>
+                    {!user && <Link to="/register">Rejestracja</Link>}
+                    {!user && <Link to="/login">Logowanie</Link>}
                     {user && <Link to={`/searchUsers`}>Wyszukiwarka użytkowników</Link>}
                     {user && <Link to={`/user/${user.id}`}>Profil Użytkownika</Link>}
                 </NavBar>
-                <h1>Projekt semestralny</h1>
             </header>
             <main>
-                <h2>Witamy na stronie głównej naszego projektu</h2>
                 <div className="photo-feed">
                     <PhotoSearcher/>
-                    {/* <div>
-                        <button onClick={() => setViewMode('albums')}>Albumy</button>
-                        <button onClick={() => setViewMode('photos')}>Zdjęcia</button>
-                    </div>
-                    {viewMode === 'albums' && <AlbumComponent filteredAlbums={albums} showManipulateButtons={false} />}
-                    {viewMode === 'photos' && <PhotoComponent filteredPhotos={photos} showManipulateButtons={false} />} */}
                 </div>
             </main>
             <footer>

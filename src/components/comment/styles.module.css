@@ -1,0 +1,51 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.wrapper .btnSegment {
+    display: flex;
+    align-items: center;
+}
+
+/* Styl dla linku Strona główna */
+.wrapper .homeLink {
+    margin-right: auto; /* Zapewnia, że wszystko po prawej stronie przesunie się do końca */
+}
+
+/* Styl dla linków dodatkowych (dzieci) */
+.wrapper .children {
+    margin-left: auto; /* Zapewnia, że linki zaczynają się od prawej strony */
+    display: flex;
+}
+
+/* Styl dla przycisku Wyloguj */
+.wrapper .btnSegment .btn {
+    margin-left: 10px; /* Odstęp między dodatkowymi linkami a przyciskiem Wyloguj */
+}
+
+/* Pozostałe style */
+.wrapper a,
+.wrapper .btnSegment .aBtn,
+.wrapper .btnSegment .btn {
+    text-decoration: none;
+    color: inherit;
+    background-color: #0693e3;
+    color: #fff;
+    border: 2px solid #0693e3;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 5px;
+    font-family: 'Roboto';
+    font-size: 16px;
+}
+
+.wrapper a:hover,
+.wrapper .btnSegment .aBtn:hover,
+.wrapper .btnSegment .btn:hover {
+    background-color: #fff;
+    color: #0693e3;
+}

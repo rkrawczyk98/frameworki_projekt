@@ -12,7 +12,20 @@
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd6;
+    background-color: #fff1;
+    color: white;
+    transition: background-color 200ms;
+    outline: none;
+}
+    
+
+.searchContainer input:hover {
+    background-color: #fff3;
+}
+
+.searchContainer input:focus {
+    outline: 1px solid hsl(181, 100%, 30%);
 }
 
 .searchContainer label {
@@ -31,20 +44,16 @@
 
 .switchViewButtons button {
     text-decoration: none;
-    background-color: lightgray;
-    color: black;
-    border: 1px solid lightgray;
-    border-radius: 5px;
+    background-color: #fff1;
+    color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
-    padding: 5px;
-    font-family: 'Roboto';
-    font-size: 20px;
-    margin: 15px;
+    padding: 20px 50px;
+    font-size: 16px;
+    margin: 10px;
+    border: none;
 }
 
-
 .switchViewButtons button:hover {
-    background-color: #fff;
-    color: #0693e3;
+    background-color: #fff4;
 }

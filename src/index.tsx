@@ -9,6 +9,9 @@ import { PhotoProvider } from './contexts/PhotoContext';
 import { CommentProvider } from './contexts/CommentContext';
 import { ToDoProvider } from './contexts/ToDoContext';
 import { PostProvider } from './contexts/PostContext';
+import { faB, faCheckSquare, faCoffee, faDatabase, faHouseLaptop, faS, fas, faWindowMaximize } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+library.add(faB, faS, fas, faHouseLaptop, faCheckSquare, faCoffee, faDatabase, faWindowMaximize)
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

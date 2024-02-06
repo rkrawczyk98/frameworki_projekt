@@ -127,7 +127,9 @@ const UserPage: React.FC = () => {
 
     return (
         <div className={styles.userPage}>
-            <NavBar></NavBar>
+            <header className='wrapper'>
+                <NavBar/>
+            </header>
             <h2>Profil Użytkownika</h2>
             <div className={styles.userInfo}>
                 <div><strong>Imię i Nazwisko:</strong> {profileUser?.name}</div>

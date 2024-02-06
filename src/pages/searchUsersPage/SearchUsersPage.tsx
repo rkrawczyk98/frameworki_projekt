@@ -5,7 +5,9 @@ import NavBar from '../../components/navbar/NavBar';
 const SearchUsersPage = () => {
     return (
         <div>
-            <NavBar />
+            <header className='wrapper'>
+                <NavBar/>
+            </header>
             <UserSearcher />
         </div>
     );

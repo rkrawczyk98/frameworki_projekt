@@ -1,20 +1,35 @@
 .wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2px;
-    background-color: lightgray;
+    margin-bottom: 5px;
+    padding: 0 1rem;
+    background-color: #fff0;
+    transition: background-color 0.2s;
 }
 
 .wrapper .btnSegment {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.wrapper button {
+    border: 1px solid white;
 }
 
 /* Styl dla linku Strona główna */
 .wrapper .homeLink {
     margin-right: auto; /* Zapewnia, że wszystko po prawej stronie przesunie się do końca */
+    background-color: transparent;
+    font-size: 2rem;
 }
+
+.wrapper .homeLink:hover{
+    background-color: transparent;
+}
+
 
 /* Styl dla linków dodatkowych (dzieci) */
 .wrapper .children {
@@ -32,20 +47,16 @@
 .wrapper .btnSegment .aBtn,
 .wrapper .btnSegment .btn {
     text-decoration: none;
-    background-color: rgba(1, 1, 1, 0);
-    color: black;
-    border: 10px solid rgba(1, 1, 1, 0);
-    border-radius: 5px;
+    background-color: #fff1;
+    color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
-    padding: 5px;
-    font-family: 'Roboto';
-    font-size: 20px;
+    padding: 25px;
+    font-size: 16px;
 }
 
 .wrapper a:hover,
 .wrapper .btnSegment .aBtn:hover,
 .wrapper .btnSegment .btn:hover {
-    background-color: #fff;
-    color: #0693e3;
+    background-color: #fff4;
 }
