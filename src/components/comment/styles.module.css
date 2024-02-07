@@ -1,51 +1,49 @@
-.wrapper {
+.newCommentInput {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: white;
+    justify-content: center;
+    outline: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    resize: none;
 }
 
-.wrapper .btnSegment {
+.newComment{
     display: flex;
-    align-items: center;
+    margin-top: 15px;
 }
 
-/* Styl dla linku Strona główna */
-.wrapper .homeLink {
-    margin-right: auto; /* Zapewnia, że wszystko po prawej stronie przesunie się do końca */
-}
-
-/* Styl dla linków dodatkowych (dzieci) */
-.wrapper .children {
-    margin-left: auto; /* Zapewnia, że linki zaczynają się od prawej strony */
+.comment {
+    position: relative;
+    margin-bottom: 25px;
     display: flex;
+    flex-flow: column;
 }
 
-/* Styl dla przycisku Wyloguj */
-.wrapper .btnSegment .btn {
-    margin-left: 10px; /* Odstęp między dodatkowymi linkami a przyciskiem Wyloguj */
+.commentBody {
+    max-width: 97%;
+    text-align: justify;
+    word-wrap:break-word
 }
 
-/* Pozostałe style */
-.wrapper a,
-.wrapper .btnSegment .aBtn,
-.wrapper .btnSegment .btn {
-    text-decoration: none;
-    color: inherit;
-    background-color: #0693e3;
-    color: #fff;
-    border: 2px solid #0693e3;
-    border-radius: 5px;
+.commentAuthor {
+    align-self: flex-end;
+}
+
+.deleteComment {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    color: #fffa;
     cursor: pointer;
-    transition: background-color 0.3s;
-    padding: 5px;
-    font-family: 'Roboto';
-    font-size: 16px;
+    transition: 0.2s;
 }
 
-.wrapper a:hover,
-.wrapper .btnSegment .aBtn:hover,
-.wrapper .btnSegment .btn:hover {
-    background-color: #fff;
-    color: #0693e3;
+.deleteComment:hover{
+    color: red;
 }
