@@ -2,7 +2,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px; 
+    gap: 10px;
+}
+
+
+@container chuj (min-width: 20px) {
+    .photoGallery {
+        background-color: red;
+    }
 }
 
 .photoContainer {
@@ -12,7 +19,7 @@
     background-color: rgba(221, 221, 221, 0.027);
     text-align: center;
     flex-basis: calc(15% - 10px);
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .photoContainer:hover {
@@ -33,7 +40,8 @@
     margin-bottom: 10px;
 }
 
-.editForm input, .editForm button {
+.editForm input,
+.editForm button {
     margin-right: 10px;
 }
 
@@ -44,7 +52,8 @@
     margin-top: 20px;
 }
 
-.addButton input, .addButton button {
+.addButton input,
+.addButton button {
     margin-right: 10px;
     padding: 5px;
     border-radius: 5px;
@@ -54,5 +63,3 @@
 .addButton button {
     cursor: pointer;
 }
-
-

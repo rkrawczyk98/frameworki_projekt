@@ -42,8 +42,8 @@ const LoginPage: React.FC = () => {
                 </NavBar>
             </header>
 
-            <form onSubmit={handleSubmit}>
-                <h2>Logowanie</h2>
+                <h1 className="loginHeader">Logowanie</h1>
+            <form onSubmit={handleSubmit} className="loginForm">
                 <div className="form-group">
                     <label htmlFor="username">Nazwa użytkownika</label>
                     <input
@@ -52,6 +52,7 @@ const LoginPage: React.FC = () => {
                         name="username"
                         value={formData.username}
                         onChange={handleInputChange}
+                        className="loginInput"
                     />
                 </div>
                 <div className="form-group">
@@ -62,9 +63,10 @@ const LoginPage: React.FC = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleInputChange}
+                        className="loginInput"
                     />
                 </div>
-                <button type="submit">Zaloguj się</button>
+                <button className="loginButton" type="submit">Zaloguj się</button>
             </form>
         </div>
     );
