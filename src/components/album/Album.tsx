@@ -61,9 +61,9 @@ const AlbumComponent: React.FC<AlbumComponentProps> = ({ filteredAlbums, showMan
     return (
         <div>
             <h2>Albumy</h2>
-            <div>
+            <div className={styles.wrapper}>
                 {filteredAlbums?.map(album => (
-                    <div key={album.id} className={styles.wrapper} onClick={() => handleAlbumClick(album.id)}>
+                    <div key={album.id} className={styles.albumWrapper} onClick={() => handleAlbumClick(album.id)}>
                         {editAlbumId === album.id && showManipulateButtons ? (
                             <div className={styles.editForm}>
                                 <label>Tytuł: </label>

@@ -1,19 +1,33 @@
 /* styles.module.css */
+
 .wrapper {
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; 
 }
 
-.wrapper:hover {
-    background-color: #f3f3f3;
+.albumWrapper {
+    border: 1px solid #ddd3;
+    flex-basis: calc(15% - 10px);
+    padding: 10px;
+    max-width: 300px;
+    border-radius: 5px;
+    background-color: rgba(221, 221, 221, 0.027);
+    text-align: center;
+    transition: 0.2s;
+}
+
+.albumWrapper:hover {
+    background-color: #ddd1;
 }
 
 .albumDetails {
-    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.editForm {
+    margin-top: 10px;
 }
 
 .albumDetails label {
@@ -26,10 +40,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.editForm {
-    margin-bottom: 10px;
 }
 
 .editForm input {

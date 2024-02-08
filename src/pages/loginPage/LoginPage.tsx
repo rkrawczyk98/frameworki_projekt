@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link , useNavigate } from 'react-router-dom';
 import { useAuth }  from '../../contexts/UserContext';
 import NavBar from '../../components/navbar/NavBar';
-import "./custom.css"
 
 interface LoginFormData {
     username: string;
@@ -37,11 +36,14 @@ const LoginPage: React.FC = () => {
 
     return (
         <div className="login-page">
-            <NavBar>
-                {!user && <Link to="/register">Rejestracja</Link>}
-            </NavBar>
-            <form onSubmit={handleSubmit}>
-                <h2>Logowanie</h2>
+            <header>            
+                <NavBar>
+                    {!user && <Link to="/register">Rejestracja</Link>}
+                </NavBar>
+            </header>
+
+                <h1 className="loginHeader">Logowanie</h1>
+            <form onSubmit={handleSubmit} className="loginForm">
                 <div className="form-group">
                     <label htmlFor="username">Nazwa użytkownika</label>
                     <input
@@ -50,6 +52,7 @@ const LoginPage: React.FC = () => {
                         name="username"
                         value={formData.username}
                         onChange={handleInputChange}
+                        className="loginInput"
                     />
                 </div>
                 <div className="form-group">
@@ -60,9 +63,10 @@ const LoginPage: React.FC = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleInputChange}
+                        className="loginInput"
                     />
                 </div>
-                <button type="submit">Zaloguj się</button>
+                <button className="loginButton" type="submit">Zaloguj się</button>
             </form>
         </div>
     );

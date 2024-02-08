@@ -1,0 +1,49 @@
+.newCommentInput {
+    display: flex;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: white;
+    justify-content: center;
+    outline: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    resize: none;
+}
+
+.newComment{
+    display: flex;
+    margin-top: 15px;
+}
+
+.comment {
+    position: relative;
+    margin-bottom: 25px;
+    display: flex;
+    flex-flow: column;
+}
+
+.commentBody {
+    max-width: 97%;
+    text-align: justify;
+    word-wrap:break-word
+}
+
+.commentAuthor {
+    align-self: flex-end;
+}
+
+.deleteComment {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    color: #fffa;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.deleteComment:hover{
+    color: red;
+}

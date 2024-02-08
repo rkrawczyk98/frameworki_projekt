@@ -1,21 +1,49 @@
 /* styles.module.css */
 .container {
-    padding: 10px;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 800px;
+    gap: 10px;
 }
 
 .post {
-    border: 1px solid #ccc;
+    background-color: #ddd1;
     margin-bottom: 10px;
-    padding: 10px;
+    border-radius: 5px;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
 }
 
-.postHeader {
+.postTitle {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 .postBody {
     margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.article {
+    background-color: hsla(181, 100%, 10%, 0.6);
+    border-radius: 0 0 5px 5px;
+}
+
+.comment {
+    color: #fffa;
+}
+
+.article,
+.comment {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.postAuthor {
+    align-self: flex-end;
 }
 
 .button {
@@ -24,6 +52,7 @@
 
 .inputField {
     margin-bottom: 10px;
+    width: 100%;
     padding: 5px;
 }
 
@@ -34,21 +63,4 @@
 .label {
     display: block;
     margin-bottom: 5px;
-}
-.addButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.addButton input, .addButton button {
-    margin-right: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.addButton button {
-    cursor: pointer;
 }
