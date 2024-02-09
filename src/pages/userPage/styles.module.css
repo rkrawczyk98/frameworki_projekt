@@ -3,7 +3,7 @@
 }
 
 h1 {
-    margin: 15px 0 0 0;
+    margin: 15px 0;
 }
 
 .editForm {
@@ -32,6 +32,12 @@ h1 {
     height: 2rem;
     text-align: center;
 }
+
+.PostComponentContainer {
+    margin: 50px 15px 50px 15px;
+}
+
+
 
 .userInput:focus{
     outline: 1px solid hsl(181, 100%, 30%);
@@ -65,16 +71,21 @@ h1 {
     margin: 10px 0px;
     display: flex;
     justify-content: center;
-
 }
 
 .editForm button {
-    padding: 10px 20px;
+    padding: 40px 20px;
     background-color: #fff1;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transform: translateY(-13%);
+    transition: 0.2s;
+}
+
+.editForm button:hover {
+    color: greenyellow;
 }
 
 .buttonContainer {

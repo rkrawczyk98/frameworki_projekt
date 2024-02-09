@@ -4,6 +4,8 @@ import { Photo } from "../../types/Photo";
 import { useAlbums } from "../../contexts/AlbumContext";
 import { useAuth } from "../../contexts/UserContext";
 import styles from "./styles.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "font-awesome/css/font-awesome.min.css";
 
 interface PhotoComponentProps {
     filteredPhotos: Photo[];
@@ -87,6 +89,47 @@ const PhotoComponent: React.FC<PhotoComponentProps> = ({
     return (
         <div className="queryContainer">
             <h2>Zdjęcia</h2>
+            {showManipulateButtons && user && (
+                <div className={styles.addButton}>
+                    <form className={styles.addButtonForm}>
+                        <input
+                            value={newPhotoTitle}
+                            onChange={(e) => setNewPhotoTitle(e.target.value)}
+                            placeholder="Tytuł"
+                        />
+                        <input
+                            placeholder="Numer Albumu"
+                            value={
+                                newPhotoAlbumId !== null
+                                    ? newPhotoAlbumId.toString()
+                                    : ""
+                            }
+                            onChange={(e) =>
+                                setNewPhotoAlbumID(
+                                    e.target.value
+                                        ? parseInt(e.target.value, 10)
+                                        : null
+                                )
+                            }
+                        />
+                        <input
+                            placeholder="Adres Url postu"
+                            value={newPhotoUrl}
+                            onChange={(e) => setNewPhotoUrl(e.target.value)}
+                        />
+                        <input
+                            placeholder="Adres Url miniaturki:"
+                            value={newPhotoThumbnailUrl}
+                            onChange={(e) =>
+                                setNewPhotoThumbnailUrl(e.target.value)
+                            }
+                        />
+                    </form>
+                    <button className="newPhotoButton" onClick={handleAddPhoto}>
+                        <FontAwesomeIcon icon={["fas", "add"]} size="lg" />
+                    </button>
+                </div>
+            )}
             <div className={styles.photoGallery}>
                 {filteredPhotos?.map((photo) => (
                     <div key={photo.id} className={styles.photoContainer}>
@@ -159,45 +202,6 @@ const PhotoComponent: React.FC<PhotoComponentProps> = ({
                     </div>
                 ))}
             </div>
-            {showManipulateButtons && user && (
-                <div className={styles.addButton}>
-                    <form>
-                        <label>Tytuł:</label>
-                        <input
-                            value={newPhotoTitle}
-                            onChange={(e) => setNewPhotoTitle(e.target.value)}
-                        />
-                        <label>Numer albumu:</label>
-                        <input
-                            value={
-                                newPhotoAlbumId !== null
-                                    ? newPhotoAlbumId.toString()
-                                    : ""
-                            }
-                            onChange={(e) =>
-                                setNewPhotoAlbumID(
-                                    e.target.value
-                                        ? parseInt(e.target.value, 10)
-                                        : null
-                                )
-                            }
-                        />
-                        <label>Adres Url postu:</label>
-                        <input
-                            value={newPhotoUrl}
-                            onChange={(e) => setNewPhotoUrl(e.target.value)}
-                        />
-                        <label>Adres Url miniaturki:</label>
-                        <input
-                            value={newPhotoThumbnailUrl}
-                            onChange={(e) =>
-                                setNewPhotoThumbnailUrl(e.target.value)
-                            }
-                        />
-                    </form>
-                    <button onClick={handleAddPhoto}>Dodaj Zdjęcie</button>
-                </div>
-            )}
         </div>
     );
 };

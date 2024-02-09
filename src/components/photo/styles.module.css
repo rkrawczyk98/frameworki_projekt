@@ -1,15 +1,9 @@
 .photoGallery {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-}
-
-
-@container chuj (min-width: 20px) {
-    .photoGallery {
-        background-color: red;
-    }
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .photoContainer {
@@ -36,6 +30,12 @@
     border-radius: 5px;
 }
 
+.addButtonForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
 .editForm {
     margin-bottom: 10px;
 }
@@ -47,17 +47,34 @@
 
 .addButton {
     display: flex;
-    align-items: center;
+    margin: 20px 0;
     justify-content: center;
-    margin-top: 20px;
+    position: relative;
 }
 
-.addButton input,
-.addButton button {
+.addButton label {
     margin-right: 10px;
-    padding: 5px;
+}
+
+.addButton input {
+    display: flex;
+    background-color: transparent;
+    border: none;
+    color: white;
+    justify-content: center;
+    outline: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    resize: none;
+    background-color: #ddd1;
+    height: 2rem;
+    text-align: center;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    transition: 0.2s;
+}
+
+.addButton input:hover {
+    background-color: #ddd2;
 }
 
 .addButton button {
