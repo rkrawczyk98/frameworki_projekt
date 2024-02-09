@@ -1,14 +1,10 @@
-.home-page {
-    background: rgb(82,82,82);
-    background: linear-gradient(90deg, rgba(82,82,82,1) 0%, rgba(195,188,188,1) 50%, rgba(82,82,82,1) 100%);
-}
 .userPage {
     margin: 0 auto;
     padding: 20px;
 }
 
 .userInfo {
-    background-color: #e9ecef;
+    background-color: #f4f4f4;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -74,18 +70,13 @@
 } */
 
 .editForm button {
-    text-decoration: none;
-    background-color: lightgray;
-    color: black;
-    border: 1px solid lightgray;
-    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    padding: 5px;
-    font-family: 'Roboto';
-    font-size: 20px;
 }
-
 /* .editForm button {
     display: flex;
     justify-content: center;
@@ -99,8 +90,7 @@
 } */
 
 .editForm button:hover {
-    background-color: #fff;
-    color: #0693e3;
+    background-color: #0056b3;
 }
 
 .buttonContainer {
@@ -134,3 +124,4 @@
 .viewSwitch button:hover {
     background-color: #0056b3;
 }
+

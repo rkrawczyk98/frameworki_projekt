@@ -1,19 +1,33 @@
 /* styles.module.css */
+
 .wrapper {
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
-.wrapper:hover {
-    background-color: #f3f3f3;
+.albumWrapper {
+    border: 1px solid #ddd3;
+    flex-basis: calc(15% - 10px);
+    padding: 10px;
+    max-width: 300px;
+    border-radius: 5px;
+    background-color: rgba(221, 221, 221, 0.027);
+    text-align: center;
+    transition: 0.2s;
+}
+
+.albumWrapper:hover {
+    background-color: #ddd1;
 }
 
 .albumDetails {
-    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.editForm {
+    margin-top: 10px;
 }
 
 .albumDetails label {
@@ -28,10 +42,6 @@
     justify-content: center;
 }
 
-.editForm {
-    margin-bottom: 10px;
-}
-
 .editForm input {
     margin-right: 10px;
 }
@@ -42,6 +52,13 @@
 
 .addButton {
     margin-top: 20px;
+    max-width: 30%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .addButton label {
@@ -49,10 +66,23 @@
 }
 
 .addButton input {
-    margin-right: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    display: flex;
+    background-color: transparent;
+    border: none;
+    color: white;
+    justify-content: center;
+    outline: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    resize: none;
+    background-color: #ddd1;
+    width: 100%;
+    height: 2rem;
+    text-align: center;
+}
+
+.addButton input:hover {
+    background-color: #ddd2;
 }
 
 .addButton button {
