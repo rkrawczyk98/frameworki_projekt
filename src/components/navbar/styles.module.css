@@ -5,7 +5,7 @@
     align-items: center;
     margin-bottom: 5px;
     padding: 0 1rem;
-    background-color: #fff0;
+    background-color: transparent;
     transition: background-color 0.2s;
 }
 
@@ -26,10 +26,9 @@
     font-size: 2rem;
 }
 
-.wrapper .homeLink:hover{
+.wrapper .homeLink:hover {
     background-color: transparent;
 }
-
 
 /* Styl dla linków dodatkowych (dzieci) */
 .wrapper .children {

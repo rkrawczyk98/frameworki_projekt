@@ -8,12 +8,18 @@
 
 .post {
     background-color: #ddd1;
-    margin-bottom: 10px;
+    margin: 10px;
     border-radius: 5px;
     transition: 0.2s;
     display: flex;
     flex-direction: column;
     text-align: start;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.newUserPost {
+    display: flex;
 }
 
 .postTitle {
@@ -26,9 +32,15 @@
     font-size: 1.2rem;
 }
 
+.editMode,
 .article {
     background-color: hsla(181, 100%, 10%, 0.6);
     border-radius: 0 0 5px 5px;
+}
+
+.editMode {
+    display: flex;
+    padding: 15px;
 }
 
 .comment {
@@ -46,21 +58,64 @@
     align-self: flex-end;
 }
 
+.buttonsContainer {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .button {
     margin-right: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    color: #ddd3;
+    transition: 0.2s;
+}
+
+.button:hover {
+    color: #fff;
 }
 
 .inputField {
     margin-bottom: 10px;
-    width: 100%;
+    width: 50%;
     padding: 5px;
+    background-color: #ddd1;
+    border: none;
+    color: white;
+    outline: none;
 }
 
-.editMode {
-    background-color: #f3f3f3;
+.editModeContainer {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+}
+
+.editModeContainer textarea {
+    resize: none;
+    height: max-content;
+}
+
+h2 {
+    padding: 15px;
+}
+
+.editModeContainer button {
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .label {
     display: block;
     margin-bottom: 5px;
+}
+
+.newUserPost {
+    margin: 15px;
 }

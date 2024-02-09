@@ -64,6 +64,25 @@ const PostComponent: React.FC<PostComponentProps> = ({
     return (
         <div className={styles.post}>
             <h2 className={styles.postHeader}>Posty</h2>
+            {showManipulateButtons ? (
+                <div className={styles.newUserPost}>
+                    <input
+                        className="userPostInput"
+                        value={newPostTitle}
+                        onChange={(e) => setNewPostTitle(e.target.value)}
+                        placeholder="Tytuł"
+                    />
+                    <textarea
+                        className="userPostInput"
+                        value={newPostBody}
+                        onChange={(e) => setNewPostBody(e.target.value)}
+                        placeholder="Treść"
+                    />
+                    <button className="newPostButton" onClick={handleAddPost}>
+                        <FontAwesomeIcon icon={["fas", "add"]} size="lg" />
+                    </button>
+                </div>
+            ) : null}
             <div>
                 {filteredPosts.map((post) => (
                     <div
@@ -75,7 +94,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
                         }
                     >
                         {editPostId === post.id && showManipulateButtons ? (
-                            <div>
+                            <div className={styles.editModeContainer}>
                                 <input
                                     className={styles.inputField}
                                     value={editPostTitle}
@@ -83,7 +102,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
                                         setEditPostTitle(e.target.value)
                                     }
                                 />
-                                <input
+                                <textarea
                                     className={styles.inputField}
                                     value={editPostBody}
                                     onChange={(e) =>
@@ -94,59 +113,64 @@ const PostComponent: React.FC<PostComponentProps> = ({
                                     className={styles.button}
                                     onClick={handleSaveEdit}
                                 >
-                                    Zapisz
+                                    <FontAwesomeIcon
+                                        icon={["fas", "save"]}
+                                        size="lg"
+                                        className={styles.faIconSave}
+                                    />
                                 </button>
                             </div>
                         ) : (
-                            <div >
-                                <div className={styles.postHeader}>
-                                    Tytuł: <span>{post.title}</span>
-                                </div>
-                                <div className={styles.postBody}>
-                                    Treść: <span>{post.body}</span>
-                                </div>
+                            <div className={styles.article}>
+                                <h2 className={styles.postTitle}>
+                                    {post.title}
+                                </h2>
+                                <p className={styles.postBody}>{post.body}</p>
                                 {showManipulateButtons ? (
-                                    <button
-                                        className={styles.button}
-                                        onClick={() => handleEditPost(post)}
-                                    >
-                                        Edytuj
-                                    </button>
-                                ) : null}
-                                {showManipulateButtons ? (
-                                    <button
-                                        className={styles.button}
-                                        onClick={() => deletePost(post.id)}
-                                    >
-                                        Usuń
-                                    </button>
+                                    <div className={styles.buttonsContainer}>
+                                        <button
+                                            className={styles.button}
+                                            onClick={() => handleEditPost(post)}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={["fas", "edit"]}
+                                                size="lg"
+                                                className={styles.faIconEdit}
+                                            />
+                                        </button>
+                                        <button
+                                            className={styles.button}
+                                            onClick={() => deletePost(post.id)}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={["fas", "trash"]}
+                                                size="lg"
+                                                className={styles.faIconTrash}
+                                            />
+                                        </button>
+                                    </div>
                                 ) : null}
                             </div>
                         )}
                     </div>
                 ))}
             </div>
-            {showManipulateButtons ? (
-                <div>
-                    <label className={styles.label}>Tytuł:</label>
-                    <input
-                        className={styles.inputField}
-                        value={newPostTitle}
-                        onChange={(e) => setNewPostTitle(e.target.value)}
-                    />
-                    <label className={styles.label}>Treść:</label>
-                    <input
-                        className={styles.inputField}
-                        value={newPostBody}
-                        onChange={(e) => setNewPostBody(e.target.value)}
-                    />
-                    <button className={styles.button} onClick={handleAddPost}>
-                        Dodaj Post
-                    </button>
-                </div>
-            ) : null}
         </div>
     );
 };
 
 export default PostComponent;
+
+{
+    /* <div className={styles.addButton}>
+                    <input
+                        className={styles.newAlbumInput}
+                        value={newAlbumTitle}
+                        onChange={(e) => setNewAlbumTitle(e.target.value)}
+                        placeholder="Nazwa nowego albumu"
+                    />
+                    <button className="newTodoButton" onClick={handleAddAlbum}>
+                        <FontAwesomeIcon icon={["fas", "add"]} size="lg" />
+                    </button>
+                </div> */
+}

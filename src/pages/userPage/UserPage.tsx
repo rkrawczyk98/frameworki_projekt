@@ -13,6 +13,8 @@ import { usePhotos } from "../../contexts/PhotoContext";
 import { usePosts } from "../../contexts/PostContext";
 import PostComponent from "../../components/post/Post";
 import styles from "./styles.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "font-awesome/css/font-awesome.min.css";
 
 const UserPage: React.FC = () => {
     const [profileUser, setProfileUser] = useState<User | null>(null);
@@ -318,9 +320,13 @@ const UserPage: React.FC = () => {
                                 }
                             />
                         </div>
-                    </div>
-                    <div className={styles.buttonContainer}>
-                        <button type="submit">Zapisz zmiany</button>
+                    <button className="button" type="submit">
+                        <FontAwesomeIcon
+                            icon={["fas", "save"]}
+                            size="lg"
+                            className={styles.faIconSave}
+                        />
+                    </button>
                     </div>
                 </form>
             )}
@@ -340,10 +346,12 @@ const UserPage: React.FC = () => {
                     showManipulateButtons={isCurrentUserProfile}
                 />
             )}
-            <PostComponent
-                filteredPosts={filteredPosts}
-                showManipulateButtons={isCurrentUserProfile}
-            />
+            <div className={styles.PostComponentContainer}>
+                <PostComponent
+                    filteredPosts={filteredPosts}
+                    showManipulateButtons={isCurrentUserProfile}
+                />
+            </div>
         </div>
     );
 };
